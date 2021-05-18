@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "701770364247",
+    "project_id": "comidinhas-5739e",
+    "storage_bucket": "comidinhas-5739e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:701770364247:android:d3e98cfefdd28f7b53fa12",
+        "android_client_info": {
+          "package_name": "com.comidinhas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "701770364247-ifmtqaatl3pgis7v022icd4dink407cp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4VGB30-vx3xZDDq_imN1JMECpFHXhP2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "701770364247-ifmtqaatl3pgis7v022icd4dink407cp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
