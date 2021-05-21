@@ -4,23 +4,37 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.2.2 <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.2
+
+  # Firebase
   cloud_firestore: ^2.1.0
   firebase_auth: ^1.1.4
   firebase_core: ^1.1.1
-  get_it: ^6.0.0
-  http: ^0.13.3
-  provider: ^5.0.0
+
+  # Stacked
   stacked: ^2.1.3
+  stacked_services: ^0.8.6
+  stacked_firebase_auth: ^0.2.5
+
+  # Data models
+  freezed_annotation: ^0.14.2
+  json_annotation: ^4.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  build_runner: ^2.0.3
+  stacked_generator: ^0.4.6
+
+  # Data models
+  freezed: ^0.14.2
+  json_serializable: ^4.1.2
 
 flutter:
   uses-material-design: true

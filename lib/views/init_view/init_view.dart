@@ -1,13 +1,14 @@
-import 'package:comidinhas/viewmodels/start_up_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-class StartUpView extends StatelessWidget {
+import 'package:comidinhas/views/init_view/init_viewmodel.dart';
+
+class InitViewView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<StartUpViewModel>.reactive(
-      viewModelBuilder: () => StartUpViewModel(),
-      onModelReady: (model) => model.checkUserLogIn(),
+    return ViewModelBuilder<InitViewViewModel>.reactive(
+      viewModelBuilder: () => InitViewViewModel(),
+      onModelReady: (model) => model.checkLogedUser(),
       builder: (context, model, _) => Scaffold(
         body: Container(
           height: double.infinity,
@@ -21,7 +22,7 @@ class StartUpView extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline1,
                 textAlign: TextAlign.center,
               ),
-              if (model.busy)
+              if (model.isBusy)
                 CircularProgressIndicator(
                   strokeWidth: 3,
                   valueColor: AlwaysStoppedAnimation(
@@ -30,12 +31,12 @@ class StartUpView extends StatelessWidget {
                 )
               else
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.75,
+                  width: 200,
                   child: ElevatedButton(
-                    onPressed: model.goTo,
+                    onPressed: model.goToHome,
                     child: Text('Vamos lá'),
                   ),
-                )
+                ),
             ],
           ),
         ),
