@@ -21,7 +21,7 @@ class LoginBottomSheet extends StatelessWidget {
           ],
         ),
         Container(
-          height: MediaQuery.of(context).size.height * 0.8,
+          height: MediaQuery.of(context).size.height * 0.90,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
