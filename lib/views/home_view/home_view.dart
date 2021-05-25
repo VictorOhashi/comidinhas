@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+import 'package:comidinhas/views/no_user_view/no_user_view.dart';
 import 'package:comidinhas/views/profile_view/profile_view.dart';
 
 import 'home_viewmodel.dart';
 import 'widgets/bottom_navigation.dart';
 
 class HomeView extends StatelessWidget {
-  Widget _getViewForIndex(int index, BuildContext context) {
-    switch (index) {
+  Widget _getViewForIndex(HomeViewModel model, BuildContext context) {
+    switch (model.currentIndex) {
       case 1:
         return Scaffold(
           body: Text('Busca'),
@@ -18,7 +19,7 @@ class HomeView extends StatelessWidget {
           body: Text('Adicionar'),
         );
       case 3:
-        return ProfileView();
+        return model.hasLoggedInUser ? ProfileView() : NoUserView();
       default:
         return SafeArea(
           child: Container(
@@ -35,7 +36,7 @@ class HomeView extends StatelessWidget {
                   width: 230,
                   child: Text(
                     'Qual prato vai querer fazer hoje?',
-                    style: Theme.of(context).textTheme.headline2,
+                    style: Theme.of(context).textTheme.headline3,
                   ),
                 ),
               ],
@@ -54,7 +55,7 @@ class HomeView extends StatelessWidget {
           currentIndex: model.currentIndex,
           setIndex: model.setIndex,
         ),
-        body: _getViewForIndex(model.currentIndex, context),
+        body: _getViewForIndex(model, context),
       ),
     );
   }

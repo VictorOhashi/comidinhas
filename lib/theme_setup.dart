@@ -20,6 +20,9 @@ class CustomTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
+          textStyle: MaterialStateProperty.all(
+            TextStyle(fontSize: 20),
+          ),
           padding: MaterialStateProperty.all(
             EdgeInsets.all(10),
           ),
@@ -27,11 +30,15 @@ class CustomTheme {
       ),
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
+          textStyle: MaterialStateProperty.all(
+            TextStyle(fontSize: 20),
+          ),
           foregroundColor: MaterialStateProperty.all(Colors.black87),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(),
+        labelStyle: TextStyle(color: Colors.black87),
       ),
       fontFamily: 'Montserrat',
       textTheme: TextTheme(
@@ -48,6 +55,10 @@ class CustomTheme {
           fontWeight: FontWeight.w700,
         ),
         headline2: TextStyle(
+          fontSize: 40,
+          fontWeight: FontWeight.w600,
+        ),
+        headline3: TextStyle(
           fontSize: 22,
           fontWeight: FontWeight.w600,
         ),

@@ -1,13 +1,15 @@
-import 'package:comidinhas/views/login_user_view/login_user_view.form.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
+import 'package:comidinhas/views/authentication_view/authentication_view.dart';
+
+import 'login_user_view.form.dart';
 import 'login_user_viewmode.dart';
 
 @FormView(fields: [
   FormTextField(name: 'email'),
-  FormTextField(name: 'password'),
+  FormTextField(name: 'password', isPassword: true),
 ])
 class LoginUserView extends StatelessWidget with $LoginUserView {
   LoginUserView({Key? key}) : super(key: key);
@@ -16,21 +18,18 @@ class LoginUserView extends StatelessWidget with $LoginUserView {
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginUserViewModel>.reactive(
       viewModelBuilder: () => LoginUserViewModel(),
+      onModelReady: (model) => listenToFormUpdated(model),
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
-          title: Text('Entrar com sua conta'),
+          title: Text('Logar'),
+          centerTitle: true,
         ),
-        body: Column(
-          children: [
-            TextField(
-              decoration: InputDecoration(labelText: 'Email'),
-              controller: emailController,
-            ),
-            TextField(
-              decoration: InputDecoration(labelText: 'Password'),
-              controller: passwordController,
-            ),
-          ],
+        body: AuthenticationView(
+          busy: model.isBusy,
+          onSubmit: model.saveData,
+          emailController: emailController,
+          passwordController: passwordController,
+          validationMessage: model.validationMessage,
         ),
       ),
     );

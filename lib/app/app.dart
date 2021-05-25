@@ -1,3 +1,4 @@
+import 'package:comidinhas/views/no_user_view/no_user_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -15,6 +16,7 @@ import 'package:comidinhas/views/profile_view/profile_view.dart';
     MaterialRoute(page: InitViewView, initial: true),
     MaterialRoute(page: HomeView),
     MaterialRoute(page: ProfileView),
+    MaterialRoute(page: NoUserView),
     MaterialRoute(page: LoginUserView),
     MaterialRoute(page: CreateUserView),
   ],

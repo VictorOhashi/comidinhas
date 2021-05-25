@@ -3,6 +3,7 @@ import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:comidinhas/api/firestore_api.dart';
 import 'package:comidinhas/app/app.locator.dart';
 import 'package:comidinhas/app/app.logger.dart';
+import 'package:comidinhas/exceptions/firestore_api_exception.dart';
 import 'package:comidinhas/models/application_models.dart';
 
 class UserService {
@@ -15,7 +16,7 @@ class UserService {
 
   User? _currentUser;
 
-  User get currentUser => _currentUser!;
+  User? get currentUser => _currentUser;
 
   bool get hasLoggedInUser => _firebaseAuthenticationService.hasUser;
 
@@ -24,12 +25,18 @@ class UserService {
         _firebaseAuthenticationService.firebaseAuth.currentUser!.uid;
 
     log.v('Sync user $firebaseUserId');
+    try {
+      final userAccount = await _firestoreApi.getUser(userId: firebaseUserId);
 
-    final userAccount = await _firestoreApi.getUser(userId: firebaseUserId);
-
-    if (userAccount != null) {
-      log.v('User account exists. Save as _currentUser');
-      _currentUser = userAccount;
+      if (userAccount != null) {
+        log.v('User account exists. Save as _currentUser');
+        _currentUser = userAccount;
+      }
+    } catch (error) {
+      throw (FirestoreApiException(
+        message: 'Failed sync existing user',
+        devDetails: '$error',
+      ));
     }
   }
 

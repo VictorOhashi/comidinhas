@@ -43,9 +43,12 @@ class LoginBottomSheet extends StatelessWidget {
                   ),
                 ],
               ),
-              ElevatedButton(
-                onPressed: goToCreateUser,
-                child: Text('Crie sua conta'),
+              Container(
+                width: 250,
+                child: ElevatedButton(
+                  onPressed: goToCreateUser,
+                  child: Text('Crie sua conta'),
+                ),
               ),
               TextButton(
                 onPressed: goToLoginUser,

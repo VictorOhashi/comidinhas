@@ -22,10 +22,14 @@ class InitViewViewModel extends BaseViewModel {
     if (_userService.hasLoggedInUser) {
       log.v('We have a user session on disk. Sync the user profile ...');
       await _userService.syncUserAccount();
-
       final currentUser = _userService.currentUser;
-      log.v('User sync complete. User profile: $currentUser');
-      goToHome();
+
+      if (currentUser != null) {
+        log.v('User sync complete. User profile: $currentUser');
+        goToHome();
+      } else {
+        setBusy(false);
+      }
     } else {
       log.v('No user on disk, navigate to the LoginView');
     }
