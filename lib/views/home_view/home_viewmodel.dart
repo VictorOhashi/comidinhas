@@ -5,5 +5,5 @@ import 'package:stacked/stacked.dart';
 class HomeViewModel extends IndexTrackingViewModel {
   final UserService _userService = locator<UserService>();
 
-  bool get hasLoggedInUser => _userService.hasLoggedInUser;
+  bool get hasCurrentUser => _userService.currentUser != null;
 }

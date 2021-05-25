@@ -19,7 +19,7 @@ class HomeView extends StatelessWidget {
           body: Text('Adicionar'),
         );
       case 3:
-        return model.hasLoggedInUser ? ProfileView() : NoUserView();
+        return model.hasCurrentUser ? ProfileView() : NoUserView();
       default:
         return SafeArea(
           child: Container(
