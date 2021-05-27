@@ -10,7 +10,7 @@ class ProfileView extends StatelessWidget {
       viewModelBuilder: () => ProfileViewModel(),
       builder: (context, model, child) => Scaffold(
         body: SafeArea(
-          child: Text(model.currentUser.name!),
+          child: Text(model.currentUser.nome!),
         ),
       ),
     );

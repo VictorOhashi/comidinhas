@@ -1,14 +1,14 @@
-import 'package:comidinhas/views/no_user_view/no_user_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import 'package:comidinhas/api/firestore_api.dart';
+import 'package:comidinhas/services/receita_services.dart';
 import 'package:comidinhas/services/user_services.dart';
 import 'package:comidinhas/views/create_user_view/create_user_view.dart';
 import 'package:comidinhas/views/home_view/home_view.dart';
 import 'package:comidinhas/views/init_view/init_view.dart';
 import 'package:comidinhas/views/login_user_view/login_user_view.dart';
+import 'package:comidinhas/views/no_user_view/no_user_view.dart';
 import 'package:comidinhas/views/profile_view/profile_view.dart';
 
 @StackedApp(
@@ -23,7 +23,7 @@ import 'package:comidinhas/views/profile_view/profile_view.dart';
   dependencies: [
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: UserService),
-    LazySingleton(classType: FirestoreApi),
+    LazySingleton(classType: ReceitaService),
     Singleton(classType: FirebaseAuthenticationService),
   ],
   logger: StackedLogger(),

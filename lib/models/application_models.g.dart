@@ -10,12 +10,16 @@ _$_User _$_$_UserFromJson(Map<String, dynamic> json) {
   return _$_User(
     id: json['id'] as String,
     email: json['email'] as String?,
-    name: json['name'] as String?,
+    nome: json['nome'] as String?,
+    avaliacao: json['avaliacao'] as int?,
+    descricao: json['descricao'] as String?,
   );
 }
 
 Map<String, dynamic> _$_$_UserToJson(_$_User instance) => <String, dynamic>{
       'id': instance.id,
       'email': instance.email,
-      'name': instance.name,
+      'nome': instance.nome,
+      'avaliacao': instance.avaliacao,
+      'descricao': instance.descricao,
     };

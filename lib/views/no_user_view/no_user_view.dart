@@ -9,7 +9,6 @@ class NoUserView extends StatelessWidget {
     return ViewModelBuilder<NoUserViewModel>.reactive(
       viewModelBuilder: () => NoUserViewModel(),
       builder: (context, model, child) => Scaffold(
-        appBar: AppBar(),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

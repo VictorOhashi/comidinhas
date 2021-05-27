@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+import 'package:comidinhas/views/home_view/widgets/receitas_view.dart';
 import 'package:comidinhas/views/no_user_view/no_user_view.dart';
 import 'package:comidinhas/views/profile_view/profile_view.dart';
 
@@ -21,28 +22,7 @@ class HomeView extends StatelessWidget {
       case 3:
         return model.hasCurrentUser ? ProfileView() : NoUserView();
       default:
-        return SafeArea(
-          child: Container(
-            margin: const EdgeInsets.all(15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Olá',
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
-                SizedBox(height: 10),
-                Container(
-                  width: 230,
-                  child: Text(
-                    'Qual prato vai querer fazer hoje?',
-                    style: Theme.of(context).textTheme.headline3,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
+        return ReceitasView();
     }
   }
 
@@ -50,11 +30,9 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       viewModelBuilder: () => HomeViewModel(),
+      onModelReady: (model) => model.listenToReceitas(),
       builder: (context, model, child) => Scaffold(
-        bottomNavigationBar: BottomNavigation(
-          currentIndex: model.currentIndex,
-          setIndex: model.setIndex,
-        ),
+        bottomNavigationBar: BottomNavigation(),
         body: _getViewForIndex(model, context),
       ),
     );

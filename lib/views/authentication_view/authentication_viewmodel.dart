@@ -50,7 +50,7 @@ abstract class AuthenticationViewModel extends FormViewModel {
         user: User(
           id: user.uid,
           email: user.email,
-          name: getName(),
+          nome: getName(),
         ),
       );
 

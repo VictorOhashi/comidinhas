@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
 
-class BottomNavigation extends StatelessWidget {
-  final int currentIndex;
-  final void Function(int) setIndex;
+import '../home_viewmodel.dart';
 
-  BottomNavigation({required this.currentIndex, required this.setIndex});
-
+class BottomNavigation extends ViewModelWidget<HomeViewModel> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, HomeViewModel viewModel) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      currentIndex: currentIndex,
-      onTap: setIndex,
+      currentIndex: viewModel.currentIndex,
+      onTap: viewModel.setIndex,
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           label: 'Início',
