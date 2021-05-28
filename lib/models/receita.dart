@@ -4,7 +4,7 @@ class Receita {
   final String nome;
   final int quantidadePessoas;
   final int tempoPreparo;
-  final int? avaliacao;
+  final double? avaliacao;
 
   final List<String> imagens;
   final List<String> ingredientes;
@@ -41,7 +41,7 @@ class Receita {
         nome: map['nome'],
         quantidadePessoas: map['quantidadePessoas'],
         tempoPreparo: map['tempoPreparo'],
-        avaliacao: map['avaliacao'],
+        avaliacao: double.tryParse('${map['avaliacao']}'),
         imagens: List<String>.from(map['imagens']),
         ingredientes: List<String>.from(map['ingredientes']),
         modoPreparo: List<String>.from(map['modoPreparo']),

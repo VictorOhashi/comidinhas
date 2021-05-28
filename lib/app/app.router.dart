@@ -15,6 +15,7 @@ import '../views/init_view/init_view.dart';
 import '../views/login_user_view/login_user_view.dart';
 import '../views/no_user_view/no_user_view.dart';
 import '../views/profile_view/profile_view.dart';
+import '../views/receita_view/receita_view.dart';
 
 class Routes {
   static const String initViewView = '/';
@@ -23,6 +24,7 @@ class Routes {
   static const String noUserView = '/no-user-view';
   static const String loginUserView = '/login-user-view';
   static const String createUserView = '/create-user-view';
+  static const String receitaView = '/receita-view';
   static const all = <String>{
     initViewView,
     homeView,
@@ -30,6 +32,7 @@ class Routes {
     noUserView,
     loginUserView,
     createUserView,
+    receitaView,
   };
 }
 
@@ -43,6 +46,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.noUserView, page: NoUserView),
     RouteDef(Routes.loginUserView, page: LoginUserView),
     RouteDef(Routes.createUserView, page: CreateUserView),
+    RouteDef(Routes.receitaView, page: ReceitaView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -86,6 +90,12 @@ class StackedRouter extends RouterBase {
       );
       return MaterialPageRoute<dynamic>(
         builder: (context) => CreateUserView(key: args.key),
+        settings: data,
+      );
+    },
+    ReceitaView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const ReceitaView(),
         settings: data,
       );
     },

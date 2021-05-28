@@ -59,7 +59,7 @@ class CustomTheme {
           fontWeight: FontWeight.w600,
         ),
         headline3: TextStyle(
-          fontSize: 22,
+          fontSize: 24,
           fontWeight: FontWeight.w600,
         ),
         button: TextStyle(

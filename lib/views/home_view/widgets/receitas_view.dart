@@ -28,7 +28,10 @@ class ReceitasView extends ViewModelWidget<HomeViewModel> {
                 ),
               ),
               SizedBox(height: 10),
-              ReceitasList(receitas: viewModel.receitas)
+              ReceitasList(
+                receitas: viewModel.receitas,
+                onClick: viewModel.goToReceitaDetail,
+              )
             ],
           ),
         ),

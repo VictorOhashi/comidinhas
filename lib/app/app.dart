@@ -1,3 +1,4 @@
+import 'package:comidinhas/views/receita_view/receita_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -19,6 +20,7 @@ import 'package:comidinhas/views/profile_view/profile_view.dart';
     MaterialRoute(page: NoUserView),
     MaterialRoute(page: LoginUserView),
     MaterialRoute(page: CreateUserView),
+    MaterialRoute(page: ReceitaView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),

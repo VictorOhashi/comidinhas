@@ -6,7 +6,13 @@ import 'widgets/receita_card.dart';
 class ReceitasList extends StatelessWidget {
   final List<Receita> receitas;
 
-  ReceitasList({Key? key, required this.receitas}) : super(key: key);
+  final Function(Receita receita) onClick;
+
+  ReceitasList({
+    Key? key,
+    required this.receitas,
+    required this.onClick,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +22,7 @@ class ReceitasList extends StatelessWidget {
       itemCount: receitas.length,
       itemBuilder: (ctx, index) {
         final receita = receitas[index];
-        return ReceitaCard(receita);
+        return ReceitaCard(receita, onClick);
       },
     );
   }
