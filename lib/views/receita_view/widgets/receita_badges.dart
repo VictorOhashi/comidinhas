@@ -62,7 +62,7 @@ class ReceitaBadges extends StatelessWidget {
           _buildBadge(
             color: Color(0xFFCEF7D7),
             text: tempoPreparo > 10
-                ? '${tempoPreparo - 5} ~ ${tempoPreparo + 5}'
+                ? '${tempoPreparo - 5} ~ ${tempoPreparo + 5} min'
                 : '$tempoPreparo min',
             icon: Icons.access_time_rounded,
           ),
