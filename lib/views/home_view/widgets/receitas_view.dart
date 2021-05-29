@@ -1,7 +1,7 @@
+import 'package:comidinhas/views/home_view/widgets/categorias_list.dart';
+import 'package:comidinhas/widgets/receita_card.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-
-import 'package:comidinhas/widgets/receitas_list/receitas_list.dart';
 
 import '../home_viewmodel.dart';
 
@@ -12,35 +12,45 @@ class ReceitasView extends ViewModelWidget<HomeViewModel> {
       child: RefreshIndicator(
         onRefresh: () => viewModel.getReceitas(),
         child: SingleChildScrollView(
-          child: Container(
-            margin: const EdgeInsets.all(15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Olá',
-                  style: Theme.of(context).textTheme.bodyText1,
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Olá ${viewModel.hasCurrentUser ? viewModel.currentUser!.nome : ''},',
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      width: 230,
+                      child: Text(
+                        'Qual prato vai querer fazer hoje?',
+                        style: Theme.of(context).textTheme.headline3,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    CategoriasList(),
+                  ],
                 ),
-                SizedBox(height: 10),
-                Container(
-                  width: 230,
-                  child: Text(
-                    'Qual prato vai querer fazer hoje?',
-                    style: Theme.of(context).textTheme.headline3,
-                  ),
-                ),
-                SizedBox(height: 10),
-                if (viewModel.isBusy)
-                  Center(
-                    child: CircularProgressIndicator(),
-                  )
-                else
-                  ReceitasList(
-                    receitas: viewModel.receitas,
-                    onClick: viewModel.goToReceitaDetail,
-                  )
-              ],
-            ),
+              ),
+              if (viewModel.isBusy)
+                Center(
+                  child: CircularProgressIndicator(),
+                )
+              else
+                ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: viewModel.receitas.length,
+                  itemBuilder: (ctx, index) {
+                    final receita = viewModel.receitas[index];
+                    return ReceitaCard(receita);
+                  },
+                )
+            ],
           ),
         ),
       ),

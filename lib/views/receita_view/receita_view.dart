@@ -1,11 +1,11 @@
-import 'package:comidinhas/widgets/circle_rouded_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import 'package:comidinhas/models/receita.dart';
+import 'package:comidinhas/widgets/circle_rouded_avatar.dart';
+import 'package:comidinhas/widgets/icon_box.dart';
 
 import 'receita_viewmodel.dart';
-import 'widgets/favorite_button.dart';
 import 'widgets/ingredientes_card.dart';
 import 'widgets/modo_preparo.dart';
 import 'widgets/receita_badges.dart';
@@ -28,22 +28,22 @@ class ReceitaView extends StatelessWidget {
             SliverAppBar(
               pinned: true,
               expandedHeight: 180,
-              leading: InkWell(
-                child: Container(
-                  margin: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xCCFFFFFF),
-                  ),
-                  child: Icon(
-                    Icons.arrow_back,
-                  ),
-                ),
+              leading: IconBox(
+                icon: Icons.arrow_back,
                 onTap: model.goBack,
               ),
               actions: [
-                if (model.hasCurrentUser) FavoriteButton(receita.documentId)
+                if (model.hasCurrentUser)
+                  Container(
+                    width: 56,
+                    child: IconBox(
+                      icon: model.isFavorite
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: model.isFavorite ? Colors.red : Colors.black87,
+                      onTap: () => model.favoriteReceita(receita.documentId),
+                    ),
+                  )
               ],
               flexibleSpace: FlexibleSpaceBar(
                 background: Image.network(

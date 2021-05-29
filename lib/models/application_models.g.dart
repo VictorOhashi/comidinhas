@@ -16,6 +16,8 @@ _$_User _$_$_UserFromJson(Map<String, dynamic> json) {
     descricao: json['descricao'] as String?,
     favoritos:
         (json['favoritos'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    receitas:
+        (json['receitas'] as List<dynamic>?)?.map((e) => e as String).toList(),
   );
 }
 
@@ -27,4 +29,5 @@ Map<String, dynamic> _$_$_UserToJson(_$_User instance) => <String, dynamic>{
       'avaliacao': instance.avaliacao,
       'descricao': instance.descricao,
       'favoritos': instance.favoritos,
+      'receitas': instance.receitas,
     };

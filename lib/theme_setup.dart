@@ -13,7 +13,7 @@ class CustomTheme {
       primaryColorBrightness: Brightness.light,
       accentColor: Color(0xFFDA291C),
       accentColorBrightness: Brightness.dark,
-      scaffoldBackgroundColor: Colors.white,
+      scaffoldBackgroundColor: Color(0xFFFAFAFA),
       appBarTheme: AppBarTheme(
         elevation: 1,
         backgroundColor: Colors.white,

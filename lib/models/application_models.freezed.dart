@@ -27,7 +27,8 @@ class _$UserTearOff {
       String? image,
       int? avaliacao,
       String? descricao,
-      List<String>? favoritos}) {
+      List<String>? favoritos,
+      List<String>? receitas}) {
     return _User(
       id: id,
       email: email,
@@ -36,6 +37,7 @@ class _$UserTearOff {
       avaliacao: avaliacao,
       descricao: descricao,
       favoritos: favoritos,
+      receitas: receitas,
     );
   }
 
@@ -56,6 +58,7 @@ mixin _$User {
   int? get avaliacao => throw _privateConstructorUsedError;
   String? get descricao => throw _privateConstructorUsedError;
   List<String>? get favoritos => throw _privateConstructorUsedError;
+  List<String>? get receitas => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -73,7 +76,8 @@ abstract class $UserCopyWith<$Res> {
       String? image,
       int? avaliacao,
       String? descricao,
-      List<String>? favoritos});
+      List<String>? favoritos,
+      List<String>? receitas});
 }
 
 /// @nodoc
@@ -93,6 +97,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? avaliacao = freezed,
     Object? descricao = freezed,
     Object? favoritos = freezed,
+    Object? receitas = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -123,6 +128,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.favoritos
           : favoritos // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      receitas: receitas == freezed
+          ? _value.receitas
+          : receitas // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ));
   }
 }
@@ -139,7 +148,8 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? image,
       int? avaliacao,
       String? descricao,
-      List<String>? favoritos});
+      List<String>? favoritos,
+      List<String>? receitas});
 }
 
 /// @nodoc
@@ -160,6 +170,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? avaliacao = freezed,
     Object? descricao = freezed,
     Object? favoritos = freezed,
+    Object? receitas = freezed,
   }) {
     return _then(_User(
       id: id == freezed
@@ -190,6 +201,10 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.favoritos
           : favoritos // ignore: cast_nullable_to_non_nullable
               as List<String>?,
+      receitas: receitas == freezed
+          ? _value.receitas
+          : receitas // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ));
   }
 }
@@ -204,7 +219,8 @@ class _$_User implements _User {
       this.image,
       this.avaliacao,
       this.descricao,
-      this.favoritos});
+      this.favoritos,
+      this.receitas});
 
   factory _$_User.fromJson(Map<String, dynamic> json) =>
       _$_$_UserFromJson(json);
@@ -223,10 +239,12 @@ class _$_User implements _User {
   final String? descricao;
   @override
   final List<String>? favoritos;
+  @override
+  final List<String>? receitas;
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, nome: $nome, image: $image, avaliacao: $avaliacao, descricao: $descricao, favoritos: $favoritos)';
+    return 'User(id: $id, email: $email, nome: $nome, image: $image, avaliacao: $avaliacao, descricao: $descricao, favoritos: $favoritos, receitas: $receitas)';
   }
 
   @override
@@ -249,7 +267,10 @@ class _$_User implements _User {
                     .equals(other.descricao, descricao)) &&
             (identical(other.favoritos, favoritos) ||
                 const DeepCollectionEquality()
-                    .equals(other.favoritos, favoritos)));
+                    .equals(other.favoritos, favoritos)) &&
+            (identical(other.receitas, receitas) ||
+                const DeepCollectionEquality()
+                    .equals(other.receitas, receitas)));
   }
 
   @override
@@ -261,7 +282,8 @@ class _$_User implements _User {
       const DeepCollectionEquality().hash(image) ^
       const DeepCollectionEquality().hash(avaliacao) ^
       const DeepCollectionEquality().hash(descricao) ^
-      const DeepCollectionEquality().hash(favoritos);
+      const DeepCollectionEquality().hash(favoritos) ^
+      const DeepCollectionEquality().hash(receitas);
 
   @JsonKey(ignore: true)
   @override
@@ -282,7 +304,8 @@ abstract class _User implements User {
       String? image,
       int? avaliacao,
       String? descricao,
-      List<String>? favoritos}) = _$_User;
+      List<String>? favoritos,
+      List<String>? receitas}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
@@ -300,6 +323,8 @@ abstract class _User implements User {
   String? get descricao => throw _privateConstructorUsedError;
   @override
   List<String>? get favoritos => throw _privateConstructorUsedError;
+  @override
+  List<String>? get receitas => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$UserCopyWith<_User> get copyWith => throw _privateConstructorUsedError;

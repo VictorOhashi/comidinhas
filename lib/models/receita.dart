@@ -28,7 +28,6 @@ class Receita {
 
   Map<String, dynamic> toMap() {
     return {
-      'documentId': documentId,
       'userId': userId,
       'nome': nome,
       'quantidadePessoas': quantidadePessoas,

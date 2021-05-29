@@ -30,7 +30,10 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       viewModelBuilder: () => HomeViewModel(),
-      onModelReady: (model) => model.getReceitas(),
+      onModelReady: (model) async {
+        await model.getCategorias();
+        await model.getReceitas();
+      },
       builder: (context, model, child) => Scaffold(
         bottomNavigationBar: BottomNavigation(),
         body: _getViewForIndex(model, context),
