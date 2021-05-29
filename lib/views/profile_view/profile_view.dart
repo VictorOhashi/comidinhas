@@ -10,7 +10,15 @@ class ProfileView extends StatelessWidget {
       viewModelBuilder: () => ProfileViewModel(),
       builder: (context, model, child) => Scaffold(
         body: SafeArea(
-          child: Text(model.currentUser.nome!),
+          child: Column(
+            children: [
+              Text(model.currentUser.nome!),
+              ElevatedButton(
+                onPressed: model.logOut,
+                child: Text('Sair'),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'widgets/receita_card.dart';
 
 class ReceitasList extends StatelessWidget {
-  final List<Receita> receitas;
+  final List<ReceitaWithUser> receitas;
 
-  final Function(Receita receita) onClick;
+  final Function(ReceitaWithUser receita) onClick;
 
   ReceitasList({
     Key? key,

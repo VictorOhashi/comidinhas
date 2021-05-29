@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:stacked/stacked.dart';
 
-import '../no_user_viewmodel.dart';
+class LoginBottomSheet extends StatelessWidget {
+  final Function() goToLoginUser;
+  final Function() goToCreateUser;
 
-class LoginBottomSheet extends ViewModelWidget<NoUserViewModel> {
+  LoginBottomSheet(this.goToLoginUser, this.goToCreateUser);
+
   @override
-  Widget build(BuildContext context, NoUserViewModel viewModel) {
+  Widget build(BuildContext context) {
     return Wrap(
       alignment: WrapAlignment.center,
       children: [
@@ -43,12 +45,12 @@ class LoginBottomSheet extends ViewModelWidget<NoUserViewModel> {
               Container(
                 width: 250,
                 child: ElevatedButton(
-                  onPressed: viewModel.goToCreateUser,
+                  onPressed: goToCreateUser,
                   child: Text('Crie sua conta'),
                 ),
               ),
               TextButton(
-                onPressed: viewModel.goToLoginUser,
+                onPressed: goToLoginUser,
                 child: Text(
                   'Já possui conta?',
                   style: TextStyle(

@@ -27,7 +27,10 @@ class NoUserViewModel extends BaseViewModel {
       isScrollControlled: true,
       shape: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
-      builder: (ctx) => LoginBottomSheet(),
+      builder: (ctx) => LoginBottomSheet(
+        goToLoginUser,
+        goToCreateUser,
+      ),
     );
   }
 }

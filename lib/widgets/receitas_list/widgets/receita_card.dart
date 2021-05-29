@@ -4,8 +4,8 @@ import 'package:comidinhas/widgets/receitas_list/widgets/rating.dart';
 import 'package:flutter/material.dart';
 
 class ReceitaCard extends StatelessWidget {
-  final Receita receita;
-  final Function(Receita receita) onClick;
+  final ReceitaWithUser receita;
+  final Function(ReceitaWithUser receita) onClick;
 
   const ReceitaCard(this.receita, this.onClick);
 
@@ -34,7 +34,7 @@ class ReceitaCard extends StatelessWidget {
                     bottomRight: Radius.circular(20),
                   ),
                   child: Image.network(
-                    receita.imagens[0],
+                    receita.imagem,
                     height: 180,
                     width: double.infinity,
                     fit: BoxFit.fill,
@@ -43,34 +43,45 @@ class ReceitaCard extends StatelessWidget {
                 Positioned(
                   bottom: -30,
                   left: 10,
-                  child: CircleRoudedAvatar(),
+                  child: CircleRoudedAvatar(receita.user.image!),
                 ),
               ],
             ),
             Container(
-              padding: EdgeInsets.only(left: 80, right: 10),
+              padding: EdgeInsets.only(left: 80, right: 10, top: 10),
               child: Text(
                 receita.nome,
-                style: Theme.of(context).textTheme.bodyText2,
-                textAlign: TextAlign.center,
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 18),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  RichText(
+                    text: TextSpan(
+                      text: 'Por ',
+                      style: TextStyle(color: Colors.black45),
+                      children: [
+                        TextSpan(
+                          text: receita.user.nome,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                   Rating(avaliacao: receita.avaliacao),
                   Row(
                     children: [
                       Icon(Icons.access_time_rounded, size: 18),
                       SizedBox(width: 5),
                       Text(
-                        receita.tempoPreparo > 10
-                            ? '${receita.tempoPreparo - 5} - ${receita.tempoPreparo + 5}'
-                            : '${receita.tempoPreparo} min',
+                        '${receita.tempoPreparo} min',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 
@@ -86,6 +88,35 @@ class UserService {
       await createUser(user: user);
       _currentUser = user;
       log.v('_currentUser has been saved');
+    }
+  }
+
+  Future<void> favoriteReceita(receitaId) async {
+    log.i('Favorite receita $receitaId');
+    if (_currentUser != null) {
+      var currentUser = _currentUser;
+      try {
+        var favReceitaIndex = currentUser!.favoritos!
+            .indexWhere((favorito) => favorito == receitaId);
+
+        if (favReceitaIndex >= 0) {
+          currentUser.favoritos!.removeAt(favReceitaIndex);
+        } else {
+          currentUser.favoritos!.add(receitaId);
+        }
+
+        final userDocument = userCollection.doc(currentUser.id);
+        await userDocument.update({'favoritos': currentUser.favoritos});
+
+        log.v('Receita favorited ${userDocument.path}');
+
+        _currentUser = currentUser;
+      } catch (error) {
+        throw (FirestoreApiException(
+          message: 'Failed to favorite receita $receitaId',
+          devDetails: '$error',
+        ));
+      }
     }
   }
 }

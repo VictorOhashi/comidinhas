@@ -12,11 +12,8 @@ import 'package:comidinhas/models/application_models.dart';
 abstract class AuthenticationViewModel extends FormViewModel {
   final log = getLogger('AuthenticationViewModel');
 
-  final userService = locator<UserService>();
-  final navigationService = locator<NavigationService>();
-
-  final firebaseAuthenticationService =
-      locator<FirebaseAuthenticationService>();
+  final _userService = locator<UserService>();
+  final _navigationService = locator<NavigationService>();
 
   @override
   void setFormStatus() {}
@@ -46,15 +43,16 @@ abstract class AuthenticationViewModel extends FormViewModel {
     if (!authResult.hasError && authResult.user != null) {
       final user = authResult.user!;
 
-      await userService.syncOrCreateUserAccount(
+      await _userService.syncOrCreateUserAccount(
         user: User(
           id: user.uid,
           email: user.email,
           nome: getName(),
+          favoritos: [],
         ),
       );
 
-      navigationService.clearStackAndShow(Routes.homeView);
+      _navigationService.clearStackAndShow(Routes.homeView);
     } else {
       if (!authResult.hasError && authResult.user == null) {
         log.wtf(

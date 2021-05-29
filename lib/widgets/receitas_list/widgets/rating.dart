@@ -9,23 +9,11 @@ class Rating extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final rating = avaliacao!;
-    return Row(
-      children: [
-        Text(
-          '$rating',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        SizedBox(width: 5),
-        RatingBarIndicator(
-          rating: rating,
-          itemBuilder: (ctx, _) => Icon(Icons.star, color: Colors.amber),
-          itemCount: 5,
-          itemSize: 16,
-        ),
-      ],
+    return RatingBarIndicator(
+      rating: rating,
+      itemBuilder: (ctx, _) => Icon(Icons.star, color: Colors.amber),
+      itemCount: 5,
+      itemSize: 16,
     );
   }
 }

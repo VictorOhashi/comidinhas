@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CircleRoudedAvatar extends StatelessWidget {
+  final String image;
+
+  const CircleRoudedAvatar(this.image);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -10,8 +14,8 @@ class CircleRoudedAvatar extends StatelessWidget {
       ),
       child: CircleAvatar(
         radius: 25,
-        backgroundImage: NetworkImage(
-            'https://conteudo.imguol.com.br/c/entretenimento/1d/2019/08/26/erick-jacquin-1566861608468_v2_1920x1280.jpg'),
+        backgroundColor: Colors.grey.shade100,
+        backgroundImage: NetworkImage(image),
       ),
     );
   }

@@ -22,23 +22,28 @@ class IngredientesCard extends StatelessWidget {
               'Ingredientes:',
               style: Theme.of(context).textTheme.headline3,
             ),
-            SizedBox(height: 10),
-            ListView.builder(
+            ListView.separated(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
+              separatorBuilder: (ctx, i) => SizedBox(height: 10),
               itemCount: ingredientes.length,
-              itemBuilder: (ctx, index) => ListTile(
-                contentPadding: EdgeInsets.all(0),
-                minLeadingWidth: 0,
-                horizontalTitleGap: 10,
-                leading: Icon(
-                  Icons.fiber_manual_record,
-                  color: Colors.amber,
-                ),
-                title: Text(
-                  ingredientes[index],
-                  style: TextStyle(fontWeight: FontWeight.w500),
-                ),
+              itemBuilder: (ctx, index) => Row(
+                children: [
+                  Icon(
+                    Icons.fiber_manual_record,
+                    color: Colors.amber,
+                  ),
+                  SizedBox(width: 5),
+                  Flexible(
+                    child: Text(
+                      ingredientes[index],
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                    ),
+                  )
+                ],
               ),
             )
           ],

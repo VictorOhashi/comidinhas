@@ -11,23 +11,15 @@ class ReceitaService {
   final CollectionReference<Map<String, dynamic>> receitaCollection =
       FirebaseFirestore.instance.collection('receitas');
 
-  final StreamController<List<Receita>> _receitasController =
-      StreamController<List<Receita>>.broadcast();
-
-  Stream listenReceitas() {
+  Future<List<Receita>> getReceitas() async {
     log.i('Getting receitas data');
-    receitaCollection.snapshots().listen((receitasSnapshot) {
-      final receitasDocs = receitasSnapshot.docs;
-      log.v('Receitas ${receitasDocs.length}');
-      if (receitasDocs.isNotEmpty) {
-        var receitas = receitasDocs
-            .map((snapshot) => Receita.fromMap(snapshot.data(), snapshot.id))
-            .toList();
 
-        _receitasController.add(receitas);
-      }
-    });
+    final receitasDocs = (await receitaCollection.get()).docs;
 
-    return _receitasController.stream;
+    log.v('Receitas ${receitasDocs.length}');
+
+    return receitasDocs
+        .map((snapshot) => Receita.fromMap(snapshot.data(), snapshot.id))
+        .toList();
   }
 }

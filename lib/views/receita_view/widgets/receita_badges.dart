@@ -57,19 +57,17 @@ class ReceitaBadges extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _buildBadge(
             color: Color(0xFFCEF7D7),
-            text: tempoPreparo > 10
-                ? '${tempoPreparo - 5} ~ ${tempoPreparo + 5} min'
-                : '$tempoPreparo min',
+            text: '$tempoPreparo min',
             icon: Icons.access_time_rounded,
           ),
           _buildBadge(
             color: Color(0xFFF5E8D6),
             text: '${avaliacao!}',
-            icon: avaliacao! > 2.5 ? Icons.star : Icons.star_half,
+            icon: Icons.star_border,
           ),
           _buildBadge(
             color: Color(0xFFB8C0FF),

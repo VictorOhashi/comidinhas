@@ -25,7 +25,6 @@ class ModoPreparoCard extends StatelessWidget {
               'Modo de preparo:',
               style: Theme.of(context).textTheme.headline3,
             ),
-            SizedBox(height: 10),
             ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -58,6 +57,5 @@ class ModoPreparoCard extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }
