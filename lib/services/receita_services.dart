@@ -9,6 +9,8 @@ import 'package:comidinhas/models/categoria.dart';
 import 'package:comidinhas/models/receita.dart';
 import 'package:comidinhas/services/user_services.dart';
 
+const int ReceitasLimit = 20;
+
 class ReceitaService {
   final log = getLogger('ReceitaService');
 
@@ -20,13 +22,17 @@ class ReceitaService {
   final CollectionReference<Map<String, dynamic>> _categoriaCollection =
       FirebaseFirestore.instance.collection('categorias');
 
-  final StreamController<List<ReceitaWithUser>> _receitaController =
-      StreamController<List<ReceitaWithUser>>.broadcast();
+  var _receitasController = StreamController<List<ReceitaWithUser>>.broadcast();
+
+  var _allPagedResults = List<List<ReceitaWithUser>>.empty(growable: true);
+
+  DocumentSnapshot? _lastDocument;
+  bool _hasMorePosts = true;
 
   List<User> _users = [];
   List<User> get users => _users;
 
-  Future<List<ReceitaWithUser>> getReceitasWithUser(
+  Future<List<ReceitaWithUser>> _getReceitasWithUser(
       List<Receita> receitas) async {
     var userToFetch = receitas.map((o) => o.userId).toSet();
 
@@ -53,10 +59,65 @@ class ReceitaService {
     }).toList();
   }
 
-  Future<List<ReceitaWithUser>> getReceitas() async {
+  void _requestReceitas() async {
     log.i('Getting receitas data');
 
-    final receitasCollection = await _receitaCollection.get();
+    var receitasQuery = _receitaCollection.limit(ReceitasLimit);
+
+    if (_lastDocument != null) {
+      receitasQuery = receitasQuery.startAfterDocument(_lastDocument!);
+    }
+
+    if (!_hasMorePosts) return;
+
+    var currentRequestIndex = _allPagedResults.length;
+
+    receitasQuery.snapshots().listen((receitasSnapshot) async {
+      var receitaDocs = receitasSnapshot.docs;
+      if (receitaDocs.isNotEmpty) {
+        log.v('Fetched ${receitaDocs.length} receitas');
+
+        var receitasData = await _getReceitasWithUser(receitaDocs
+            .map((docs) => Receita.fromMap(docs.data(), docs.id))
+            .toList());
+
+        var pageExists = currentRequestIndex < _allPagedResults.length;
+
+        if (pageExists) {
+          _allPagedResults[currentRequestIndex] = receitasData;
+        } else {
+          _allPagedResults.add(receitasData);
+        }
+
+        var allReceitas = _allPagedResults.fold<List<ReceitaWithUser>>(
+          List<ReceitaWithUser>.empty(growable: true),
+          (initialValue, pageItems) => initialValue..addAll(pageItems),
+        );
+
+        _receitasController.add(allReceitas);
+
+        if (currentRequestIndex == _allPagedResults.length - 1) {
+          _lastDocument = receitaDocs.last;
+        }
+
+        _hasMorePosts = receitasData.length == ReceitasLimit;
+      }
+    });
+  }
+
+  Stream listenToReceitas() {
+    _requestReceitas();
+    return _receitasController.stream;
+  }
+
+  void requestMoreData() => _requestReceitas();
+
+  Future<List<ReceitaWithUser>> getReceitasWithId({List<String>? ids}) async {
+    log.i('Getting receitas data');
+
+    final receitasCollection = await _receitaCollection
+        .where(FieldPath.documentId, whereIn: ids)
+        .get();
 
     final receitasDocs = receitasCollection.docs;
     log.v('Fetched ${receitasDocs.length} receitas');
@@ -65,28 +126,7 @@ class ReceitaService {
         .map((docs) => Receita.fromMap(docs.data(), docs.id))
         .toList();
 
-    return getReceitasWithUser(receitasData);
-  }
-
-  Stream listenReceitasWithId({List<String>? ids}) {
-    log.i('Listen to receitas with ids: $ids');
-
-    _receitaCollection
-        .where(FieldPath.documentId, whereIn: ids)
-        .snapshots()
-        .listen((receitasSnapshot) async {
-      if (receitasSnapshot.docs.isNotEmpty) {
-        var receitasData = receitasSnapshot.docs
-            .map((docs) => Receita.fromMap(docs.data(), docs.id))
-            .toList();
-
-        var receitas = await getReceitasWithUser(receitasData);
-
-        _receitaController.add(receitas);
-      }
-    });
-
-    return _receitaController.stream;
+    return _getReceitasWithUser(receitasData);
   }
 
   Future<List<Categoria>> getCategorias() async {

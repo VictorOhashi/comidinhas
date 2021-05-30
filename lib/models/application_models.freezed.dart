@@ -25,7 +25,7 @@ class _$UserTearOff {
       String? email,
       String? nome,
       String? image,
-      int? avaliacao,
+      double? avaliacao,
       String? descricao,
       List<String>? favoritos,
       List<String>? receitas}) {
@@ -55,7 +55,7 @@ mixin _$User {
   String? get email => throw _privateConstructorUsedError;
   String? get nome => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
-  int? get avaliacao => throw _privateConstructorUsedError;
+  double? get avaliacao => throw _privateConstructorUsedError;
   String? get descricao => throw _privateConstructorUsedError;
   List<String>? get favoritos => throw _privateConstructorUsedError;
   List<String>? get receitas => throw _privateConstructorUsedError;
@@ -74,7 +74,7 @@ abstract class $UserCopyWith<$Res> {
       String? email,
       String? nome,
       String? image,
-      int? avaliacao,
+      double? avaliacao,
       String? descricao,
       List<String>? favoritos,
       List<String>? receitas});
@@ -119,7 +119,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
       avaliacao: avaliacao == freezed
           ? _value.avaliacao
           : avaliacao // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       descricao: descricao == freezed
           ? _value.descricao
           : descricao // ignore: cast_nullable_to_non_nullable
@@ -146,7 +146,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? email,
       String? nome,
       String? image,
-      int? avaliacao,
+      double? avaliacao,
       String? descricao,
       List<String>? favoritos,
       List<String>? receitas});
@@ -192,7 +192,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
       avaliacao: avaliacao == freezed
           ? _value.avaliacao
           : avaliacao // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       descricao: descricao == freezed
           ? _value.descricao
           : descricao // ignore: cast_nullable_to_non_nullable
@@ -234,7 +234,7 @@ class _$_User implements _User {
   @override
   final String? image;
   @override
-  final int? avaliacao;
+  final double? avaliacao;
   @override
   final String? descricao;
   @override
@@ -302,7 +302,7 @@ abstract class _User implements User {
       String? email,
       String? nome,
       String? image,
-      int? avaliacao,
+      double? avaliacao,
       String? descricao,
       List<String>? favoritos,
       List<String>? receitas}) = _$_User;
@@ -318,7 +318,7 @@ abstract class _User implements User {
   @override
   String? get image => throw _privateConstructorUsedError;
   @override
-  int? get avaliacao => throw _privateConstructorUsedError;
+  double? get avaliacao => throw _privateConstructorUsedError;
   @override
   String? get descricao => throw _privateConstructorUsedError;
   @override

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:comidinhas/models/receita.dart';
 import 'package:comidinhas/services/receita_services.dart';
 import 'package:stacked/stacked.dart';
@@ -29,35 +31,15 @@ class ProfileViewModel extends BaseViewModel {
     _firebaseAuthenticationService.logout();
   }
 
-  Future<void> listenToFavorites() async {
+  Future<void> fetchUserData() async {
     setBusy(true);
 
-    _receitaService
-        .listenReceitasWithId(ids: currentUser.favoritos)
-        .listen((favoritesData) {
-      List<ReceitaWithUser> updatedFavorites = favoritesData;
-      if (updatedFavorites.length > 0) {
-        _favorites = updatedFavorites;
-        notifyListeners();
-      }
+    _favorites =
+        await _receitaService.getReceitasWithId(ids: currentUser.favoritos);
 
-      setBusy(false);
-    });
-  }
+    _receitas =
+        await _receitaService.getReceitasWithId(ids: currentUser.receitas);
 
-  Future<void> listenToUserReceitas() async {
-    setBusy(true);
-
-    _receitaService
-        .listenReceitasWithId(ids: currentUser.receitas)
-        .listen((receitasData) {
-      List<ReceitaWithUser> updatedReceitas = receitasData;
-      if (updatedReceitas.length > 0) {
-        _receitas = updatedReceitas;
-        notifyListeners();
-      }
-
-      setBusy(false);
-    });
+    setBusy(false);
   }
 }

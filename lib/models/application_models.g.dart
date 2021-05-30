@@ -12,7 +12,7 @@ _$_User _$_$_UserFromJson(Map<String, dynamic> json) {
     email: json['email'] as String?,
     nome: json['nome'] as String?,
     image: json['image'] as String?,
-    avaliacao: json['avaliacao'] as int?,
+    avaliacao: (json['avaliacao'] as num?)?.toDouble(),
     descricao: json['descricao'] as String?,
     favoritos:
         (json['favoritos'] as List<dynamic>?)?.map((e) => e as String).toList(),

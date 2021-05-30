@@ -43,17 +43,18 @@ class ReceitasList extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          height: 280,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: receitas.length,
-            itemBuilder: (ctx, index) {
-              final receita = receitas[index];
-              return ReceitaCard(receita);
-            },
+        if (receitas.length > 0)
+          Container(
+            height: 280,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: receitas.length,
+              itemBuilder: (ctx, index) {
+                final receita = receitas[index];
+                return ReceitaCard(receita);
+              },
+            ),
           ),
-        ),
       ],
     );
   }

@@ -10,7 +10,7 @@ class User with _$User {
     String? email,
     String? nome,
     String? image,
-    int? avaliacao,
+    double? avaliacao,
     String? descricao,
     List<String>? favoritos,
     List<String>? receitas,

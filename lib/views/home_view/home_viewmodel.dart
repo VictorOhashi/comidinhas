@@ -33,12 +33,19 @@ class HomeViewModel extends IndexTrackingViewModel {
     _categorias = categoriasData;
   }
 
-  Future<void> getReceitas() async {
+  Future<void> listenReceitas() async {
     setBusy(true);
 
-    _receitas = await _receitaService.getReceitas();
-    notifyListeners();
+    _receitaService.listenToReceitas().listen((receitasData) {
+      List<ReceitaWithUser> updatedReceitas = receitasData;
+      if (updatedReceitas.length > 0) {
+        _receitas = updatedReceitas;
+        notifyListeners();
+      }
 
-    setBusy(false);
+      setBusy(false);
+    });
   }
+
+  void requestMoreData() => _receitaService.requestMoreData();
 }

@@ -47,7 +47,7 @@ class Receita {
       nome: map['nome'],
       quantidadePessoas: map['quantidadePessoas'],
       tempoPreparo: map['tempoPreparo'],
-      avaliacao: double.tryParse('${map['avaliacao']}'),
+      avaliacao: (map['avaliacao'] as num).toDouble(),
       categorias: List<String>.from(map['categorias']),
       imagem: map['imagem'],
       ingredientes: List<String>.from(map['ingredientes']),

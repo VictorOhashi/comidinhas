@@ -1,3 +1,4 @@
+import 'package:comidinhas/views/form_receita_view/form_receita_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -16,9 +17,7 @@ class HomeView extends StatelessWidget {
           body: Text('Busca'),
         );
       case 2:
-        return Scaffold(
-          body: Text('Adicionar'),
-        );
+        return FormReceitaView();
       case 3:
         return model.hasCurrentUser ? ProfileView() : NoUserView();
       default:
@@ -32,7 +31,7 @@ class HomeView extends StatelessWidget {
       viewModelBuilder: () => HomeViewModel(),
       onModelReady: (model) async {
         await model.getCategorias();
-        await model.getReceitas();
+        await model.listenReceitas();
       },
       builder: (context, model, child) => Scaffold(
         bottomNavigationBar: BottomNavigation(),

@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import '../views/create_user_view/create_user_view.dart';
+import '../views/form_receita_view/form_receita_view.dart';
 import '../views/home_view/home_view.dart';
 import '../views/init_view/init_view.dart';
 import '../views/login_user_view/login_user_view.dart';
@@ -25,6 +26,7 @@ class Routes {
   static const String loginUserView = '/login-user-view';
   static const String createUserView = '/create-user-view';
   static const String receitaView = '/receita-view';
+  static const String formReceitaView = '/form-receita-view';
   static const all = <String>{
     initViewView,
     homeView,
@@ -33,6 +35,7 @@ class Routes {
     loginUserView,
     createUserView,
     receitaView,
+    formReceitaView,
   };
 }
 
@@ -47,6 +50,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.loginUserView, page: LoginUserView),
     RouteDef(Routes.createUserView, page: CreateUserView),
     RouteDef(Routes.receitaView, page: ReceitaView),
+    RouteDef(Routes.formReceitaView, page: FormReceitaView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -96,6 +100,12 @@ class StackedRouter extends RouterBase {
     ReceitaView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const ReceitaView(),
+        settings: data,
+      );
+    },
+    FormReceitaView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const FormReceitaView(),
         settings: data,
       );
     },
