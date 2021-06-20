@@ -1,8 +1,7 @@
 import 'package:comidinhas/models/application_models.dart';
 
-class Receita {
-  final String documentId;
-  final String userId;
+abstract class ReceitaProps {
+  final String? documentId;
   final String nome;
   final int quantidadePessoas;
   final int tempoPreparo;
@@ -13,18 +12,44 @@ class Receita {
   final List<String> ingredientes;
   final List<String> modoPreparo;
 
-  Receita({
-    required this.documentId,
-    required this.userId,
-    required this.nome,
-    required this.quantidadePessoas,
-    required this.tempoPreparo,
+  ReceitaProps(
+    this.documentId,
+    this.nome,
+    this.quantidadePessoas,
+    this.tempoPreparo,
     this.avaliacao,
-    required this.imagem,
-    required this.ingredientes,
-    required this.modoPreparo,
-    required this.categorias,
-  });
+    this.imagem,
+    this.ingredientes,
+    this.modoPreparo,
+    this.categorias,
+  );
+}
+
+class Receita extends ReceitaProps {
+  final String userId;
+
+  Receita({
+    required this.userId,
+    required String nome,
+    required int quantidadePessoas,
+    required int tempoPreparo,
+    required List<String> categorias,
+    required String imagem,
+    required List<String> ingredientes,
+    required List<String> modoPreparo,
+    String? documentId,
+    double? avaliacao,
+  }) : super(
+          documentId,
+          nome,
+          quantidadePessoas,
+          tempoPreparo,
+          avaliacao,
+          imagem,
+          ingredientes,
+          modoPreparo,
+          categorias,
+        );
 
   Map<String, dynamic> toMap() {
     return {
@@ -56,29 +81,42 @@ class Receita {
   }
 }
 
-class ReceitaWithUser {
-  final String documentId;
+class ReceitaWithUser extends ReceitaProps {
   final User user;
-  final String nome;
-  final int quantidadePessoas;
-  final int tempoPreparo;
-  final double? avaliacao;
-  final List<String> categorias;
-
-  final String imagem;
-  final List<String> ingredientes;
-  final List<String> modoPreparo;
 
   ReceitaWithUser({
-    required this.documentId,
     required this.user,
-    required this.nome,
-    required this.quantidadePessoas,
-    required this.tempoPreparo,
-    this.avaliacao,
-    required this.imagem,
-    required this.ingredientes,
-    required this.modoPreparo,
-    required this.categorias,
-  });
+    required String documentId,
+    required String nome,
+    required int quantidadePessoas,
+    required int tempoPreparo,
+    double? avaliacao,
+    required List<String> categorias,
+    required String imagem,
+    required List<String> ingredientes,
+    required List<String> modoPreparo,
+  }) : super(
+          documentId,
+          nome,
+          quantidadePessoas,
+          tempoPreparo,
+          avaliacao,
+          imagem,
+          ingredientes,
+          modoPreparo,
+          categorias,
+        );
+
+  Receita get receita => Receita(
+        documentId: this.documentId,
+        userId: this.user.id,
+        nome: this.nome,
+        quantidadePessoas: this.quantidadePessoas,
+        tempoPreparo: this.tempoPreparo,
+        avaliacao: this.avaliacao,
+        imagem: this.imagem,
+        ingredientes: this.ingredientes,
+        modoPreparo: this.modoPreparo,
+        categorias: this.categorias,
+      );
 }

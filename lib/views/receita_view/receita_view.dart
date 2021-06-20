@@ -43,7 +43,16 @@ class ReceitaView extends StatelessWidget {
                       color: model.isFavorite ? Colors.red : Colors.black87,
                       onTap: () => model.favoriteReceita(receita.documentId),
                     ),
-                  )
+                  ),
+                if (model.currentUser == receita.user.id)
+                  Container(
+                    width: 56,
+                    child: IconBox(
+                      icon: Icons.edit,
+                      color: Colors.black87,
+                      onTap: () => model.editReceita(receita),
+                    ),
+                  ),
               ],
               flexibleSpace: FlexibleSpaceBar(
                 background: Image.network(

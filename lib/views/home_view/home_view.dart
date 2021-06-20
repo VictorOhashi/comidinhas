@@ -17,7 +17,7 @@ class HomeView extends StatelessWidget {
           body: Text('Busca'),
         );
       case 2:
-        return FormReceitaView();
+        return model.hasCurrentUser ? FormReceitaView() : NoUserView();
       case 3:
         return model.hasCurrentUser ? ProfileView() : NoUserView();
       default:

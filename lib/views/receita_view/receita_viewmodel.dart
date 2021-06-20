@@ -1,3 +1,4 @@
+import 'package:comidinhas/app/app.router.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -15,6 +16,7 @@ class ReceitaViewModel extends BaseViewModel {
 
   bool get isFavorite => _isFavorite;
 
+  String? get currentUser => _userService.currentUser!.id;
   bool get hasCurrentUser => _userService.currentUser != null;
 
   void goBack() {
@@ -34,5 +36,9 @@ class ReceitaViewModel extends BaseViewModel {
     await _userService.favoriteReceita(id);
     checkFavorite(id);
     setBusy(false);
+  }
+
+  void editReceita(receita) async {
+    _navigationService.navigateTo(Routes.formReceitaView, arguments: receita);
   }
 }

@@ -1,3 +1,4 @@
+import 'package:comidinhas/services/image_services.dart';
 import 'package:comidinhas/views/form_receita_view/form_receita_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
@@ -26,8 +27,10 @@ import 'package:comidinhas/views/receita_view/receita_view.dart';
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),
+    LazySingleton(classType: DialogService),
     LazySingleton(classType: UserService),
     LazySingleton(classType: ReceitaService),
+    LazySingleton(classType: ImageService),
     Singleton(classType: FirebaseAuthenticationService),
   ],
   logger: StackedLogger(),

@@ -46,7 +46,7 @@ class ReceitaService {
     return receitas.map((r) {
       return ReceitaWithUser(
         user: _users.firstWhere((user) => user.id == r.userId),
-        documentId: r.documentId,
+        documentId: r.documentId!,
         nome: r.nome,
         quantidadePessoas: r.quantidadePessoas,
         tempoPreparo: r.tempoPreparo,
@@ -140,5 +140,23 @@ class ReceitaService {
     return categoriasDocs
         .map((docs) => Categoria.fromMap(docs.data(), docs.id))
         .toList();
+  }
+
+  Future<ReceitaWithUser> addReceita(Receita receita) async {
+    log.i('Addeing new receita');
+
+    var addedReceita = await _receitaCollection.add(receita.toMap());
+    var receitas = await getReceitasWithId(ids: [addedReceita.id]);
+
+    return receitas[0];
+  }
+
+  Future<ReceitaWithUser> updateReceita(Receita receita) async {
+    log.i('Updating receita ${receita.documentId}');
+
+    await _receitaCollection.doc(receita.documentId).update(receita.toMap());
+    var receitas = await getReceitasWithId(ids: [receita.documentId!]);
+
+    return receitas[0];
   }
 }

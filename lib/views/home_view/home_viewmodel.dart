@@ -1,9 +1,7 @@
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 
 import 'package:comidinhas/app/app.locator.dart';
 import 'package:comidinhas/app/app.logger.dart';
-import 'package:comidinhas/app/app.router.dart';
 import 'package:comidinhas/models/application_models.dart';
 import 'package:comidinhas/models/categoria.dart';
 import 'package:comidinhas/models/receita.dart';
