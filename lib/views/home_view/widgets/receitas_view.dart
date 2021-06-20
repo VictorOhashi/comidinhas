@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import 'package:comidinhas/services/receita_services.dart';
-import 'package:comidinhas/views/home_view/widgets/categorias_list.dart';
+// import 'package:comidinhas/views/home_view/widgets/categorias_list.dart';
 import 'package:comidinhas/widgets/loader.dart';
 import 'package:comidinhas/widgets/receita_card.dart';
 
@@ -15,7 +15,8 @@ class ReceitasView extends ViewModelWidget<HomeViewModel> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
+            Container(
+              width: double.infinity,
               padding: EdgeInsets.all(15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,7 +34,7 @@ class ReceitasView extends ViewModelWidget<HomeViewModel> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  CategoriasList(),
+                  // CategoriasList(),
                 ],
               ),
             ),
@@ -55,7 +56,7 @@ class ReceitasView extends ViewModelWidget<HomeViewModel> {
 
                   return ReceitaCard(receita);
                 },
-              )
+              ),
           ],
         ),
       ),

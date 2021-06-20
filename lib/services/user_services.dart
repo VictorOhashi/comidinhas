@@ -11,7 +11,7 @@ import 'package:comidinhas/models/application_models.dart';
 class UserService {
   final log = getLogger('UserService');
 
-  final CollectionReference<Map<String, dynamic>> userCollection =
+  final CollectionReference<Map<String, dynamic>> _userCollection =
       FirebaseFirestore.instance.collection('users');
 
   final _firebaseAuthenticationService =
@@ -27,7 +27,7 @@ class UserService {
     log.i('user:$user');
 
     try {
-      final userDocument = userCollection.doc(user.id);
+      final userDocument = _userCollection.doc(user.id);
       await userDocument.set(user.toJson());
       log.v('UserCreated at ${userDocument.path}');
     } catch (error) {
@@ -41,7 +41,7 @@ class UserService {
   Future<User?> getUser({required String userId}) async {
     log.i('userId:$userId');
     if (userId.isNotEmpty) {
-      final userDoc = await userCollection.doc(userId).get();
+      final userDoc = await _userCollection.doc(userId).get();
       if (!userDoc.exists) {
         log.v('No user with id = $userId in database');
         return null;
@@ -56,6 +56,19 @@ class UserService {
         message: 'Your userId passed in is empty',
       ));
     }
+  }
+
+  Future<List<User>> searchUsers(String nome) async {
+    log.i('Search users with $nome');
+
+    final userCollection =
+        await _userCollection.where("nome", isGreaterThanOrEqualTo: nome).get();
+
+    final usersDocs = userCollection.docs;
+
+    log.v('Fetched ${usersDocs.length} users');
+
+    return usersDocs.map((docs) => User.fromJson(docs.data())).toList();
   }
 
   Future<void> syncUserAccount() async {
@@ -105,7 +118,7 @@ class UserService {
           currentUser.favoritos!.add(receitaId);
         }
 
-        final userDocument = userCollection.doc(currentUser.id);
+        final userDocument = _userCollection.doc(currentUser.id);
         await userDocument.update({'favoritos': currentUser.favoritos});
 
         log.v('Receita favorited ${userDocument.path}');

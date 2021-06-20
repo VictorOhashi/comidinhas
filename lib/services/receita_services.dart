@@ -159,4 +159,23 @@ class ReceitaService {
 
     return receitas[0];
   }
+
+  Future<List<ReceitaWithUser>> searchReceitas(String search) async {
+    var nome = search.toLowerCase();
+
+    log.i('Search receitas with $nome');
+    final receitasCollection = await _receitaCollection
+        .where("nome", isGreaterThanOrEqualTo: nome)
+        .get();
+
+    final receitasDocs = receitasCollection.docs;
+
+    log.v('Fetched ${receitasDocs.length} receitas');
+
+    var receitasData = receitasDocs
+        .map((docs) => Receita.fromMap(docs.data(), docs.id))
+        .toList();
+
+    return _getReceitasWithUser(receitasData);
+  }
 }
