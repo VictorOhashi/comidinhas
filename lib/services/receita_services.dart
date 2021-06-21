@@ -39,7 +39,7 @@ class ReceitaService {
     var userToFetch = receitas.map((o) => o.userId).toSet();
 
     for (var userId in userToFetch) {
-      final user = await _userService.getUser(userId: userId);
+      final user = await _userService.getUser(userId: userId!);
       if (user != null) {
         _users.add(user);
       }
@@ -115,7 +115,7 @@ class ReceitaService {
   void requestMoreData() => _requestReceitas();
 
   Future<List<ReceitaWithUser>> getReceitasWithId({List<String>? ids}) async {
-    log.i('Getting receitas data');
+    log.i('Getting receitas data with ids: ${ids.toString()}');
 
     final receitasCollection = await _receitaCollection
         .where(FieldPath.documentId, whereIn: ids)

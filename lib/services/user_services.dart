@@ -158,4 +158,25 @@ class UserService {
       ));
     }
   }
+
+  Future<void> addReceita(receitaId) async {
+    log.i('Added receita to user ${_currentUser!.id}');
+
+    var currentUser = _currentUser;
+    try {
+      var newReceita = currentUser!.receitas;
+      newReceita!.add(receitaId);
+      final userDocument = _userCollection.doc(currentUser.id);
+      await userDocument.update({'receitas': newReceita});
+
+      log.v('Receita favorited ${userDocument.path}');
+
+      _currentUser = currentUser;
+    } catch (error) {
+      throw (FirestoreApiException(
+        message: 'Failed to favorite receita $receitaId',
+        devDetails: '$error',
+      ));
+    }
+  }
 }

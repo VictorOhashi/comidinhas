@@ -23,24 +23,6 @@ class ProfileView extends StatelessWidget {
             child: Column(
               children: [
                 ProfileInfo(),
-                // Container(
-                //   width: MediaQuery.of(context).size.width * 0.7,
-                //   child: ElevatedButton(
-                //     onPressed: () {},
-                //     child: Text(
-                //       'Editar perfil',
-                //       style: TextStyle(fontSize: 16),
-                //     ),
-                //     style: ButtonStyle(
-                //       elevation: MaterialStateProperty.all(2),
-                //       backgroundColor:
-                //           MaterialStateProperty.all(Colors.white),
-                //       padding: MaterialStateProperty.all(
-                //         EdgeInsets.zero,
-                //       ),
-                //     ),
-                //   ),
-                // ),
                 SizedBox(height: 15),
                 if (model.isBusy)
                   Loader(
@@ -60,8 +42,7 @@ class ProfileView extends StatelessWidget {
                         receitas: model.receitas,
                         color: Colors.blue.shade900,
                       ),
-                      if (model.currentUser?.id != null &&
-                          model.currentUser?.id != user?.id)
+                      if (model.hasRating)
                         RatingModal(
                           onRate: (rating) => model.rateUser(rating),
                         ),

@@ -28,7 +28,7 @@ abstract class ReceitaProps {
 }
 
 class Receita extends ReceitaProps {
-  final String userId;
+  final String? userId;
 
   Receita({
     required this.userId,
@@ -69,17 +69,19 @@ class Receita extends ReceitaProps {
     };
   }
 
-  factory Receita.fromMap(Map<String, dynamic> map, String documentId) {
+  factory Receita.fromMap(Map<String, dynamic> map, String? documentId) {
     return Receita(
       documentId: documentId,
       userId: map['userId'],
       nome: map['nome'],
       quantidadePessoas: map['quantidadePessoas'],
       tempoPreparo: map['tempoPreparo'],
-      avaliacoes: List<Avaliacao>.from(
-        map['avaliacoes'].map((a) => Avaliacao.fromJson(a)),
-      ),
-      categorias: List<String>.from(map['categorias']),
+      avaliacoes: map['avaliacoes'] != null
+          ? List<Avaliacao>.from(
+              map['avaliacoes'].map((a) => Avaliacao.fromJson(a)),
+            )
+          : [],
+      categorias: List<String>.from(map['categorias'] ?? []),
       imagem: map['imagem'],
       ingredientes: List<String>.from(map['ingredientes']),
       modoPreparo: List<String>.from(map['modoPreparo']),

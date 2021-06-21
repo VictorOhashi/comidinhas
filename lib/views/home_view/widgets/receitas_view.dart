@@ -38,25 +38,20 @@ class ReceitasView extends ViewModelWidget<HomeViewModel> {
                 ],
               ),
             ),
-            if (viewModel.isBusy)
-              Loader(
-                text: 'Buscando receitas...',
-              )
-            else
-              ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: viewModel.receitas.length,
-                itemBuilder: (ctx, index) {
-                  final receita = viewModel.receitas[index];
+            ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: viewModel.receitas.length,
+              itemBuilder: (ctx, index) {
+                final receita = viewModel.receitas[index];
 
-                  if (index % ReceitasLimit == 0) {
-                    viewModel.requestMoreData();
-                  }
+                if (index % ReceitasLimit == 0) {
+                  viewModel.requestMoreData();
+                }
 
-                  return ReceitaCard(receita);
-                },
-              ),
+                return ReceitaCard(receita);
+              },
+            ),
           ],
         ),
       ),

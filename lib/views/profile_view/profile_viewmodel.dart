@@ -22,6 +22,7 @@ class ProfileViewModel extends BaseViewModel {
   User? _user;
   User get user => _user!;
   User? get currentUser => _userService.currentUser;
+  bool get hasRating => currentUser?.id != null && currentUser?.id != user.id;
 
   List<ReceitaWithUser> _favorites = [];
   List<ReceitaWithUser> get favorites => _favorites;

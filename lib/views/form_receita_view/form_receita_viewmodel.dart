@@ -49,21 +49,12 @@ class FormReceitaViewModel extends IndexTrackingViewModel {
     setBusy(true);
     final image = await uploadImage();
 
-    var receita = Receita(
-      documentId: _receitaId,
-      userId: _userService.currentUser!.id,
-      nome: _formValueMap['nome'],
-      quantidadePessoas: _formValueMap['quantidadePessoas'],
-      tempoPreparo: _formValueMap['tempoPreparo'],
-      categorias: _formValueMap['categorias'] ?? [],
-      imagem: image,
-      ingredientes: _formValueMap['ingredientes'],
-      modoPreparo: _formValueMap['modoPreparo'],
-      avaliacoes: _formValueMap['avaliacoes'] ?? [],
-    );
+    _formValueMap["imagem"] = image;
+    _formValueMap["userId"] = _userService.currentUser!.id;
 
+    var receita = Receita.fromMap(_formValueMap, _receitaId);
     try {
-      var result;
+      ReceitaWithUser result;
       if (_receitaId != null) {
         result = await _receitaService.updateReceita(receita);
         await _dialogService.showDialog(
@@ -71,6 +62,8 @@ class FormReceitaViewModel extends IndexTrackingViewModel {
         );
       } else {
         result = await _receitaService.addReceita(receita);
+        await _userService.addReceita(result.documentId);
+
         await _dialogService.showDialog(
           title: 'Receita criada!',
         );
@@ -78,9 +71,9 @@ class FormReceitaViewModel extends IndexTrackingViewModel {
 
       setIndex(0);
       _formValueMap = {};
-
-      _navigationService.navigateTo(
+      _navigationService.pushNamedAndRemoveUntil(
         Routes.receitaView,
+        predicate: (route) => route.isFirst,
         arguments: result,
       );
     } catch (e) {
