@@ -1,4 +1,6 @@
 import 'package:comidinhas/app/app.router.dart';
+import 'package:comidinhas/models/receita.dart';
+import 'package:comidinhas/services/receita_services.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -11,6 +13,7 @@ class ReceitaViewModel extends BaseViewModel {
 
   final _navigationService = locator<NavigationService>();
   final _userService = locator<UserService>();
+  final _receitaService = locator<ReceitaService>();
 
   bool _isFavorite = false;
 
@@ -28,6 +31,14 @@ class ReceitaViewModel extends BaseViewModel {
       _isFavorite = _userService.currentUser!.favoritos!.contains(receitaId);
       notifyListeners();
     }
+  }
+
+  void rateReceita(ReceitaWithUser receita, rating) async {
+    setBusy(true);
+
+    await _receitaService.rateReceita(receita, rating);
+
+    setBusy(false);
   }
 
   void favoriteReceita(id) async {

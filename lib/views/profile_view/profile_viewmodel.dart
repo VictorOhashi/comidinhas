@@ -19,8 +19,8 @@ class ProfileViewModel extends BaseViewModel {
   final _firebaseAuthenticationService =
       locator<FirebaseAuthenticationService>();
 
-  User? _userToSearch;
-  User get currentUser => _userToSearch!;
+  User? _user;
+  User get currentUser => _user!;
 
   List<ReceitaWithUser> _favorites = [];
   List<ReceitaWithUser> get favorites => _favorites;
@@ -35,15 +35,27 @@ class ProfileViewModel extends BaseViewModel {
   Future<void> fetchUserData(User? user) async {
     setBusy(true);
 
-    _userToSearch = user != null ? user : _userService.currentUser;
+    _user = user != null ? user : _userService.currentUser;
 
-    _favorites =
-        await _receitaService.getReceitasWithId(ids: _userToSearch!.favoritos);
-
-    _receitas =
-        await _receitaService.getReceitasWithId(ids: _userToSearch!.receitas);
+    if (_user?.favoritos != null && _user!.favoritos!.length > 0) {
+      _favorites =
+          await _receitaService.getReceitasWithId(ids: _user!.favoritos);
+    }
+    if (_user?.receitas != null && _user!.receitas!.length > 0) {
+      _receitas = await _receitaService.getReceitasWithId(ids: _user!.receitas);
+    }
 
     notifyListeners();
+    setBusy(false);
+  }
+
+  void rateUser(double rating) async {
+    setBusy(true);
+
+    if (_user != null) {
+      await _userService.rateUser(_user!, rating);
+    }
+
     setBusy(false);
   }
 }

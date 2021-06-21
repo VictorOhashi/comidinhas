@@ -4,7 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:comidinhas/app/app.locator.dart';
 import 'package:comidinhas/app/app.logger.dart';
+import 'package:comidinhas/exceptions/firestore_api_exception.dart';
 import 'package:comidinhas/models/application_models.dart';
+import 'package:comidinhas/models/avaliacao.dart';
 import 'package:comidinhas/models/categoria.dart';
 import 'package:comidinhas/models/receita.dart';
 import 'package:comidinhas/services/user_services.dart';
@@ -54,7 +56,7 @@ class ReceitaService {
         ingredientes: r.ingredientes,
         modoPreparo: r.modoPreparo,
         categorias: r.categorias,
-        avaliacao: r.avaliacao,
+        avaliacoes: r.avaliacoes,
       );
     }).toList();
   }
@@ -177,5 +179,31 @@ class ReceitaService {
         .toList();
 
     return _getReceitasWithUser(receitasData);
+  }
+
+  Future<void> rateReceita(ReceitaWithUser receita, double rating) async {
+    var receitaId = receita.documentId;
+    log.i('Rated receita $receitaId with $rating starts');
+
+    try {
+      var avaliacoes = receita.avaliacoes;
+      var userId = _userService.currentUser!.id;
+
+      var existingIndex = avaliacoes.indexWhere((a) => a.id == userId);
+      if (existingIndex >= 0) {
+        avaliacoes.removeAt(existingIndex);
+      }
+
+      avaliacoes.add(Avaliacao(id: userId, value: rating));
+
+      await _receitaCollection.doc(receitaId).update(
+        {'avaliacoes': avaliacoes.map((a) => a.toJson()).toList()},
+      );
+    } catch (error) {
+      throw (FirestoreApiException(
+        message: 'Failed to rate receita $receitaId',
+        devDetails: '$error',
+      ));
+    }
   }
 }

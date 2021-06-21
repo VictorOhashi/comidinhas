@@ -1,3 +1,4 @@
+import 'package:comidinhas/utils/parse_avaliacao.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -6,6 +7,7 @@ import '../profile_viewmodel.dart';
 class ProfileInfo extends ViewModelWidget<ProfileViewModel> {
   @override
   Widget build(BuildContext context, ProfileViewModel viewModel) {
+    final avaliacao = getAvaliacao(viewModel.currentUser.avaliacoes);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
       child: Row(
@@ -19,10 +21,12 @@ class ProfileInfo extends ViewModelWidget<ProfileViewModel> {
               border: Border.all(color: Colors.black87, width: 2),
             ),
             clipBehavior: Clip.antiAlias,
-            child: Image.network(
-              viewModel.currentUser.image!,
-              fit: BoxFit.cover,
-            ),
+            child: viewModel.currentUser.image == null
+                ? Icon(Icons.person)
+                : Image.network(
+                    viewModel.currentUser.image!,
+                    fit: BoxFit.cover,
+                  ),
           ),
           SizedBox(width: 15),
           Expanded(
@@ -40,7 +44,7 @@ class ProfileInfo extends ViewModelWidget<ProfileViewModel> {
                         ),
                         children: [
                           TextSpan(
-                            text: "${viewModel.currentUser.avaliacao} ",
+                            text: "$avaliacao ",
                           ),
                           WidgetSpan(
                             child: Icon(

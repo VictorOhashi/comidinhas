@@ -12,7 +12,9 @@ _$_User _$_$_UserFromJson(Map<String, dynamic> json) {
     email: json['email'] as String?,
     nome: json['nome'] as String?,
     image: json['image'] as String?,
-    avaliacao: (json['avaliacao'] as num?)?.toDouble(),
+    avaliacoes: (json['avaliacoes'] as List<dynamic>?)
+        ?.map((e) => Avaliacao.fromJson(e as Map<String, dynamic>))
+        .toList(),
     descricao: json['descricao'] as String?,
     favoritos:
         (json['favoritos'] as List<dynamic>?)?.map((e) => e as String).toList(),
@@ -26,7 +28,7 @@ Map<String, dynamic> _$_$_UserToJson(_$_User instance) => <String, dynamic>{
       'email': instance.email,
       'nome': instance.nome,
       'image': instance.image,
-      'avaliacao': instance.avaliacao,
+      'avaliacoes': instance.avaliacoes,
       'descricao': instance.descricao,
       'favoritos': instance.favoritos,
       'receitas': instance.receitas,

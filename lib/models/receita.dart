@@ -1,11 +1,13 @@
 import 'package:comidinhas/models/application_models.dart';
 
+import 'avaliacao.dart';
+
 abstract class ReceitaProps {
   final String? documentId;
   final String nome;
   final int quantidadePessoas;
   final int tempoPreparo;
-  final double? avaliacao;
+  final List<Avaliacao> avaliacoes;
   final List<String> categorias;
 
   final String imagem;
@@ -17,7 +19,7 @@ abstract class ReceitaProps {
     this.nome,
     this.quantidadePessoas,
     this.tempoPreparo,
-    this.avaliacao,
+    this.avaliacoes,
     this.imagem,
     this.ingredientes,
     this.modoPreparo,
@@ -38,13 +40,13 @@ class Receita extends ReceitaProps {
     required List<String> ingredientes,
     required List<String> modoPreparo,
     String? documentId,
-    double? avaliacao,
+    required List<Avaliacao> avaliacoes,
   }) : super(
           documentId,
           nome,
           quantidadePessoas,
           tempoPreparo,
-          avaliacao,
+          avaliacoes,
           imagem,
           ingredientes,
           modoPreparo,
@@ -57,7 +59,9 @@ class Receita extends ReceitaProps {
       'nome': nome,
       'quantidadePessoas': quantidadePessoas,
       'tempoPreparo': tempoPreparo,
-      'avaliacao': avaliacao,
+      'avaliacoes': avaliacoes.map(
+        (a) => Avaliacao(id: a.id, value: a.value).toJson(),
+      ),
       'categorias': categorias,
       'imagem': imagem,
       'ingredientes': ingredientes,
@@ -72,7 +76,9 @@ class Receita extends ReceitaProps {
       nome: map['nome'],
       quantidadePessoas: map['quantidadePessoas'],
       tempoPreparo: map['tempoPreparo'],
-      avaliacao: (map['avaliacao'] as num).toDouble(),
+      avaliacoes: List<Avaliacao>.from(
+        map['avaliacoes'].map((a) => Avaliacao.fromJson(a)),
+      ),
       categorias: List<String>.from(map['categorias']),
       imagem: map['imagem'],
       ingredientes: List<String>.from(map['ingredientes']),
@@ -90,7 +96,7 @@ class ReceitaWithUser extends ReceitaProps {
     required String nome,
     required int quantidadePessoas,
     required int tempoPreparo,
-    double? avaliacao,
+    required List<Avaliacao> avaliacoes,
     required List<String> categorias,
     required String imagem,
     required List<String> ingredientes,
@@ -100,7 +106,7 @@ class ReceitaWithUser extends ReceitaProps {
           nome,
           quantidadePessoas,
           tempoPreparo,
-          avaliacao,
+          avaliacoes,
           imagem,
           ingredientes,
           modoPreparo,
@@ -113,7 +119,7 @@ class ReceitaWithUser extends ReceitaProps {
         nome: this.nome,
         quantidadePessoas: this.quantidadePessoas,
         tempoPreparo: this.tempoPreparo,
-        avaliacao: this.avaliacao,
+        avaliacoes: this.avaliacoes,
         imagem: this.imagem,
         ingredientes: this.ingredientes,
         modoPreparo: this.modoPreparo,

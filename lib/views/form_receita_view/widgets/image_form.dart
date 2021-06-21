@@ -10,13 +10,16 @@ const String ImagemValueKey = 'imageFile';
 class ImageForm extends StatefulWidget {
   final void Function(Map<String, dynamic> data) onSubmit;
   final void Function(Map<String, dynamic> data) onReturn;
+
   final Map<String, dynamic> initialValue;
+  final bool busy;
 
   const ImageForm({
     Key? key,
     required this.onSubmit,
     required this.onReturn,
     required this.initialValue,
+    required this.busy,
   }) : super(key: key);
 
   @override
@@ -82,6 +85,7 @@ class _ImageFormState extends State<ImageForm> {
           SizedBox(height: 15),
           SubmitButton(
             text: "Finalizar",
+            busy: widget.busy,
             onSubmit: () {
               widget.onSubmit({ImagemValueKey: _image});
             },

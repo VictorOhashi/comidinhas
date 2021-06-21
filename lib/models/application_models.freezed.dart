@@ -25,7 +25,7 @@ class _$UserTearOff {
       String? email,
       String? nome,
       String? image,
-      double? avaliacao,
+      List<Avaliacao>? avaliacoes,
       String? descricao,
       List<String>? favoritos,
       List<String>? receitas}) {
@@ -34,7 +34,7 @@ class _$UserTearOff {
       email: email,
       nome: nome,
       image: image,
-      avaliacao: avaliacao,
+      avaliacoes: avaliacoes,
       descricao: descricao,
       favoritos: favoritos,
       receitas: receitas,
@@ -55,7 +55,7 @@ mixin _$User {
   String? get email => throw _privateConstructorUsedError;
   String? get nome => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
-  double? get avaliacao => throw _privateConstructorUsedError;
+  List<Avaliacao>? get avaliacoes => throw _privateConstructorUsedError;
   String? get descricao => throw _privateConstructorUsedError;
   List<String>? get favoritos => throw _privateConstructorUsedError;
   List<String>? get receitas => throw _privateConstructorUsedError;
@@ -74,7 +74,7 @@ abstract class $UserCopyWith<$Res> {
       String? email,
       String? nome,
       String? image,
-      double? avaliacao,
+      List<Avaliacao>? avaliacoes,
       String? descricao,
       List<String>? favoritos,
       List<String>? receitas});
@@ -94,7 +94,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? email = freezed,
     Object? nome = freezed,
     Object? image = freezed,
-    Object? avaliacao = freezed,
+    Object? avaliacoes = freezed,
     Object? descricao = freezed,
     Object? favoritos = freezed,
     Object? receitas = freezed,
@@ -116,10 +116,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
-      avaliacao: avaliacao == freezed
-          ? _value.avaliacao
-          : avaliacao // ignore: cast_nullable_to_non_nullable
-              as double?,
+      avaliacoes: avaliacoes == freezed
+          ? _value.avaliacoes
+          : avaliacoes // ignore: cast_nullable_to_non_nullable
+              as List<Avaliacao>?,
       descricao: descricao == freezed
           ? _value.descricao
           : descricao // ignore: cast_nullable_to_non_nullable
@@ -146,7 +146,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? email,
       String? nome,
       String? image,
-      double? avaliacao,
+      List<Avaliacao>? avaliacoes,
       String? descricao,
       List<String>? favoritos,
       List<String>? receitas});
@@ -167,7 +167,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? email = freezed,
     Object? nome = freezed,
     Object? image = freezed,
-    Object? avaliacao = freezed,
+    Object? avaliacoes = freezed,
     Object? descricao = freezed,
     Object? favoritos = freezed,
     Object? receitas = freezed,
@@ -189,10 +189,10 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String?,
-      avaliacao: avaliacao == freezed
-          ? _value.avaliacao
-          : avaliacao // ignore: cast_nullable_to_non_nullable
-              as double?,
+      avaliacoes: avaliacoes == freezed
+          ? _value.avaliacoes
+          : avaliacoes // ignore: cast_nullable_to_non_nullable
+              as List<Avaliacao>?,
       descricao: descricao == freezed
           ? _value.descricao
           : descricao // ignore: cast_nullable_to_non_nullable
@@ -217,7 +217,7 @@ class _$_User implements _User {
       this.email,
       this.nome,
       this.image,
-      this.avaliacao,
+      this.avaliacoes,
       this.descricao,
       this.favoritos,
       this.receitas});
@@ -234,7 +234,7 @@ class _$_User implements _User {
   @override
   final String? image;
   @override
-  final double? avaliacao;
+  final List<Avaliacao>? avaliacoes;
   @override
   final String? descricao;
   @override
@@ -244,7 +244,7 @@ class _$_User implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, nome: $nome, image: $image, avaliacao: $avaliacao, descricao: $descricao, favoritos: $favoritos, receitas: $receitas)';
+    return 'User(id: $id, email: $email, nome: $nome, image: $image, avaliacoes: $avaliacoes, descricao: $descricao, favoritos: $favoritos, receitas: $receitas)';
   }
 
   @override
@@ -259,9 +259,9 @@ class _$_User implements _User {
                 const DeepCollectionEquality().equals(other.nome, nome)) &&
             (identical(other.image, image) ||
                 const DeepCollectionEquality().equals(other.image, image)) &&
-            (identical(other.avaliacao, avaliacao) ||
+            (identical(other.avaliacoes, avaliacoes) ||
                 const DeepCollectionEquality()
-                    .equals(other.avaliacao, avaliacao)) &&
+                    .equals(other.avaliacoes, avaliacoes)) &&
             (identical(other.descricao, descricao) ||
                 const DeepCollectionEquality()
                     .equals(other.descricao, descricao)) &&
@@ -280,7 +280,7 @@ class _$_User implements _User {
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(nome) ^
       const DeepCollectionEquality().hash(image) ^
-      const DeepCollectionEquality().hash(avaliacao) ^
+      const DeepCollectionEquality().hash(avaliacoes) ^
       const DeepCollectionEquality().hash(descricao) ^
       const DeepCollectionEquality().hash(favoritos) ^
       const DeepCollectionEquality().hash(receitas);
@@ -302,7 +302,7 @@ abstract class _User implements User {
       String? email,
       String? nome,
       String? image,
-      double? avaliacao,
+      List<Avaliacao>? avaliacoes,
       String? descricao,
       List<String>? favoritos,
       List<String>? receitas}) = _$_User;
@@ -318,7 +318,7 @@ abstract class _User implements User {
   @override
   String? get image => throw _privateConstructorUsedError;
   @override
-  double? get avaliacao => throw _privateConstructorUsedError;
+  List<Avaliacao>? get avaliacoes => throw _privateConstructorUsedError;
   @override
   String? get descricao => throw _privateConstructorUsedError;
   @override

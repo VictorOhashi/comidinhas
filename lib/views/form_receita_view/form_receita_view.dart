@@ -30,6 +30,7 @@ class FormReceitaView extends StatelessWidget {
           initialValue: model.formValueMap,
           onSubmit: model.nextPage,
           onReturn: model.returnPage,
+          busy: model.isBusy,
         );
       default:
         return BaseInfoForm(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CircleRoudedAvatar extends StatelessWidget {
-  final String image;
+  final String? image;
 
   const CircleRoudedAvatar(this.image);
 
@@ -15,7 +15,8 @@ class CircleRoudedAvatar extends StatelessWidget {
       child: CircleAvatar(
         radius: 25,
         backgroundColor: Colors.grey.shade100,
-        backgroundImage: NetworkImage(image),
+        child: image == null ? Icon(Icons.person) : null,
+        backgroundImage: image != null ? NetworkImage(image!) : null,
       ),
     );
   }

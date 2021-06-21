@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'avaliacao.dart';
+
 part 'application_models.freezed.dart';
 part 'application_models.g.dart';
 
@@ -10,7 +12,7 @@ class User with _$User {
     String? email,
     String? nome,
     String? image,
-    double? avaliacao,
+    List<Avaliacao>? avaliacoes,
     String? descricao,
     List<String>? favoritos,
     List<String>? receitas,

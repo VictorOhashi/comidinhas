@@ -4,6 +4,7 @@ import 'package:stacked/stacked.dart';
 import 'package:comidinhas/models/receita.dart';
 import 'package:comidinhas/widgets/circle_rouded_avatar.dart';
 import 'package:comidinhas/widgets/icon_box.dart';
+import 'package:comidinhas/widgets/rating_modal.dart';
 
 import 'receita_viewmodel.dart';
 import 'widgets/ingredientes_card.dart';
@@ -85,7 +86,7 @@ class ReceitaView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    CircleRoudedAvatar(receita.user.image!),
+                    CircleRoudedAvatar(receita.user.image),
                   ],
                 ),
               ),
@@ -97,10 +98,14 @@ class ReceitaView extends StatelessWidget {
                 ReceitaBadges(
                   tempoPreparo: receita.tempoPreparo,
                   quantidadePessoas: receita.quantidadePessoas,
-                  avaliacao: receita.avaliacao,
+                  avaliacoes: receita.avaliacoes,
                 ),
                 IngredientesCard(ingredientes: receita.ingredientes),
                 ModoPreparoCard(modoPreparo: receita.modoPreparo),
+                if (model.hasCurrentUser)
+                  RatingModal(
+                    onRate: (rating) => model.rateReceita(receita, rating),
+                  ),
               ],
             ),
           ),

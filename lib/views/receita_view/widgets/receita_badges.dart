@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
+import 'package:comidinhas/models/avaliacao.dart';
+import 'package:comidinhas/utils/parse_avaliacao.dart';
+
 class ReceitaBadges extends StatelessWidget {
   final int tempoPreparo;
   final int quantidadePessoas;
-  final double? avaliacao;
+  final List<Avaliacao> avaliacoes;
 
   const ReceitaBadges({
     Key? key,
     required this.tempoPreparo,
     required this.quantidadePessoas,
-    this.avaliacao,
+    required this.avaliacoes,
   }) : super(key: key);
 
   Widget _buildBadge(
@@ -54,6 +57,7 @@ class ReceitaBadges extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final rating = getAvaliacao(avaliacoes);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Row(
@@ -66,7 +70,7 @@ class ReceitaBadges extends StatelessWidget {
           ),
           _buildBadge(
             color: Color(0xFFF5E8D6),
-            text: '${avaliacao!}',
+            text: '$rating',
             icon: Icons.star_border,
           ),
           _buildBadge(

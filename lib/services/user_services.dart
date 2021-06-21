@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:comidinhas/models/avaliacao.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 
 import 'package:comidinhas/app/app.locator.dart';
@@ -130,6 +131,31 @@ class UserService {
           devDetails: '$error',
         ));
       }
+    }
+  }
+
+  Future<void> rateUser(User user, double rating) async {
+    var userId = user.id;
+    log.i('Rated user $userId with $rating starts');
+
+    try {
+      var avaliacoes = user.avaliacoes;
+
+      var existingIndex = avaliacoes!.indexWhere((a) => a.id == userId);
+      if (existingIndex >= 0) {
+        avaliacoes.removeAt(existingIndex);
+      }
+
+      avaliacoes.add(Avaliacao(id: currentUser!.id, value: rating));
+
+      await _userCollection.doc(userId).update(
+        {'avaliacoes': avaliacoes.map((a) => a.toJson()).toList()},
+      );
+    } catch (error) {
+      throw (FirestoreApiException(
+        message: 'Failed to rate user $userId',
+        devDetails: '$error',
+      ));
     }
   }
 }

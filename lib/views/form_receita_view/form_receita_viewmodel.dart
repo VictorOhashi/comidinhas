@@ -48,7 +48,7 @@ class FormReceitaViewModel extends IndexTrackingViewModel {
   void submitReceita() async {
     setBusy(true);
     final image = await uploadImage();
-    print(_receitaId);
+
     var receita = Receita(
       documentId: _receitaId,
       userId: _userService.currentUser!.id,
@@ -59,7 +59,7 @@ class FormReceitaViewModel extends IndexTrackingViewModel {
       imagem: image,
       ingredientes: _formValueMap['ingredientes'],
       modoPreparo: _formValueMap['modoPreparo'],
-      avaliacao: _formValueMap['avaliacao'] ?? 0,
+      avaliacoes: _formValueMap['avaliacoes'] ?? 0,
     );
 
     try {

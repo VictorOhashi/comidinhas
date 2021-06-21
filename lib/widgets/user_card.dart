@@ -26,9 +26,9 @@ class UserCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListTile(
-          leading: CircleRoudedAvatar(user.image!),
+          leading: CircleRoudedAvatar(user.image),
           title: Text(user.nome!),
-          subtitle: Rating(avaliacao: user.avaliacao),
+          subtitle: Rating(avaliacoes: user.avaliacoes),
           trailing: ElevatedButton(
             onPressed: goToUser,
             child: Text("Ver"),

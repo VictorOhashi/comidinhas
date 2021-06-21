@@ -49,6 +49,9 @@ abstract class AuthenticationViewModel extends FormViewModel {
           email: user.email,
           nome: getName(),
           favoritos: [],
+          avaliacoes: [],
+          descricao: "",
+          receitas: [],
         ),
       );
 

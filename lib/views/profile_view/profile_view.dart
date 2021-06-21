@@ -1,3 +1,4 @@
+import 'package:comidinhas/widgets/rating_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -59,6 +60,10 @@ class ProfileView extends StatelessWidget {
                         receitas: model.receitas,
                         color: Colors.blue.shade900,
                       ),
+                      // if (model.currentUser.id != user?.id)
+                      //   RatingModal(
+                      //     onRate: (rating) => model.rateUser(rating),
+                      //   ),
                     ],
                   )
               ],

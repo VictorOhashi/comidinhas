@@ -56,7 +56,7 @@ class ReceitaCard extends StatelessWidget {
                   Positioned(
                     bottom: -30,
                     left: 10,
-                    child: CircleRoudedAvatar(receita.user.image!),
+                    child: CircleRoudedAvatar(receita.user.image),
                   ),
                 ],
               ),
@@ -102,7 +102,7 @@ class ReceitaCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Rating(avaliacao: receita.avaliacao),
+                    Rating(avaliacoes: receita.avaliacoes),
                   ],
                 ),
               ),
