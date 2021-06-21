@@ -17,7 +17,7 @@ class ReceitaView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final receita =
-        ModalRoute.of(context)!.settings.arguments as ReceitaWithUser;
+        ModalRoute.of(context)?.settings.arguments as ReceitaWithUser;
 
     return ViewModelBuilder<ReceitaViewModel>.reactive(
       viewModelBuilder: () => ReceitaViewModel(),

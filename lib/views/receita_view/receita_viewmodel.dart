@@ -19,7 +19,7 @@ class ReceitaViewModel extends BaseViewModel {
 
   bool get isFavorite => _isFavorite;
 
-  String? get currentUser => _userService.currentUser!.id;
+  String? get currentUser => _userService.currentUser?.id;
   bool get hasCurrentUser => _userService.currentUser != null;
 
   void goBack() {

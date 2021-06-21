@@ -21,7 +21,7 @@ class ProfileViewModel extends BaseViewModel {
 
   User? _user;
   User get user => _user!;
-  User get currentUser => _userService.currentUser!;
+  User? get currentUser => _userService.currentUser;
 
   List<ReceitaWithUser> _favorites = [];
   List<ReceitaWithUser> get favorites => _favorites;
