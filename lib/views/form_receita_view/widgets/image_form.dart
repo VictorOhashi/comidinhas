@@ -12,14 +12,12 @@ class ImageForm extends StatefulWidget {
   final void Function(Map<String, dynamic> data) onReturn;
 
   final Map<String, dynamic> initialValue;
-  final bool busy;
 
   const ImageForm({
     Key? key,
     required this.onSubmit,
     required this.onReturn,
     required this.initialValue,
-    required this.busy,
   }) : super(key: key);
 
   @override
@@ -30,8 +28,8 @@ class _ImageFormState extends State<ImageForm> {
   File? _image;
   final picker = ImagePicker();
 
-  Future getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+  Future selectImage(ImageSource source) async {
+    final pickedFile = await picker.getImage(source: source);
 
     setState(() {
       if (pickedFile != null) {
@@ -40,6 +38,30 @@ class _ImageFormState extends State<ImageForm> {
         print('No image selected.');
       }
     });
+  }
+
+  void showModalImagePicker(context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => Wrap(children: [
+        ListTile(
+          leading: Icon(Icons.camera_alt),
+          title: Text('Camera'),
+          onTap: () {
+            Navigator.pop(context);
+            selectImage(ImageSource.camera);
+          },
+        ),
+        ListTile(
+          leading: Icon(Icons.photo_album),
+          title: Text('Gallery'),
+          onTap: () {
+            Navigator.pop(context);
+            selectImage(ImageSource.gallery);
+          },
+        ),
+      ]),
+    );
   }
 
   @override
@@ -56,7 +78,7 @@ class _ImageFormState extends State<ImageForm> {
           ),
           SizedBox(height: 15),
           InkWell(
-            onTap: getImage,
+            onTap: () => showModalImagePicker(context),
             child: Container(
               margin: EdgeInsets.all(15),
               height: boxSize,
@@ -73,19 +95,18 @@ class _ImageFormState extends State<ImageForm> {
                       : Image.network(
                           imageUrl,
                           width: double.infinity,
-                          fit: BoxFit.fill,
+                          fit: BoxFit.cover,
                         )
                   : Image.file(
                       _image!,
                       width: double.infinity,
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                     ),
             ),
           ),
           SizedBox(height: 15),
           SubmitButton(
             text: "Finalizar",
-            busy: widget.busy,
             onSubmit: () {
               widget.onSubmit({ImagemValueKey: _image});
             },

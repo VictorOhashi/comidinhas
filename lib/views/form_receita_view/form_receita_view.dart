@@ -2,6 +2,7 @@ import 'package:comidinhas/models/receita.dart';
 import 'package:comidinhas/views/form_receita_view/widgets/image_form.dart';
 import 'package:comidinhas/views/form_receita_view/widgets/ingredientes_form.dart';
 import 'package:comidinhas/views/form_receita_view/widgets/modo_preparo_form.dart';
+import 'package:comidinhas/widgets/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -30,7 +31,6 @@ class FormReceitaView extends StatelessWidget {
           initialValue: model.formValueMap,
           onSubmit: model.nextPage,
           onReturn: model.returnPage,
-          busy: model.isBusy,
         );
       default:
         return BaseInfoForm(
@@ -57,7 +57,13 @@ class FormReceitaView extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: SingleChildScrollView(
-              child: _getFormPage(model),
+              child: model.isBusy
+                  ? Center(
+                      child: Loader(
+                        text: 'Carregando...',
+                      ),
+                    )
+                  : _getFormPage(model),
             ),
           ),
         ),

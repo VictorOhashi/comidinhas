@@ -60,10 +60,10 @@ class ProfileView extends StatelessWidget {
                         receitas: model.receitas,
                         color: Colors.blue.shade900,
                       ),
-                      // if (model.currentUser.id != user?.id)
-                      //   RatingModal(
-                      //     onRate: (rating) => model.rateUser(rating),
-                      //   ),
+                      if (model.currentUser.id != user?.id)
+                        RatingModal(
+                          onRate: (rating) => model.rateUser(rating),
+                        ),
                     ],
                   )
               ],

@@ -4,13 +4,11 @@ class SubmitButton extends StatelessWidget {
   final void Function() onSubmit;
   final void Function()? onReturn;
   final String? text;
-  final bool busy;
 
   const SubmitButton({
     Key? key,
     required this.onSubmit,
     this.text = 'Avançar >',
-    this.busy = false,
     this.onReturn,
   }) : super(key: key);
 

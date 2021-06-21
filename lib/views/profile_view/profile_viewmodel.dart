@@ -20,7 +20,8 @@ class ProfileViewModel extends BaseViewModel {
       locator<FirebaseAuthenticationService>();
 
   User? _user;
-  User get currentUser => _user!;
+  User get user => _user!;
+  User get currentUser => _userService.currentUser!;
 
   List<ReceitaWithUser> _favorites = [];
   List<ReceitaWithUser> get favorites => _favorites;

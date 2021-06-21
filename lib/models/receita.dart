@@ -59,9 +59,9 @@ class Receita extends ReceitaProps {
       'nome': nome,
       'quantidadePessoas': quantidadePessoas,
       'tempoPreparo': tempoPreparo,
-      'avaliacoes': avaliacoes.map(
-        (a) => Avaliacao(id: a.id, value: a.value).toJson(),
-      ),
+      'avaliacoes': avaliacoes
+          .map((a) => Avaliacao(id: a.id, value: a.value).toJson())
+          .toList(),
       'categorias': categorias,
       'imagem': imagem,
       'ingredientes': ingredientes,

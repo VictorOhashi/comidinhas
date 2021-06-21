@@ -59,7 +59,7 @@ class FormReceitaViewModel extends IndexTrackingViewModel {
       imagem: image,
       ingredientes: _formValueMap['ingredientes'],
       modoPreparo: _formValueMap['modoPreparo'],
-      avaliacoes: _formValueMap['avaliacoes'] ?? 0,
+      avaliacoes: _formValueMap['avaliacoes'] ?? [],
     );
 
     try {
@@ -76,7 +76,10 @@ class FormReceitaViewModel extends IndexTrackingViewModel {
         );
       }
 
-      _navigationService.replaceWith(
+      setIndex(0);
+      _formValueMap = {};
+
+      _navigationService.navigateTo(
         Routes.receitaView,
         arguments: result,
       );

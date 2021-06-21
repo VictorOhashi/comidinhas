@@ -7,7 +7,7 @@ import '../profile_viewmodel.dart';
 class ProfileInfo extends ViewModelWidget<ProfileViewModel> {
   @override
   Widget build(BuildContext context, ProfileViewModel viewModel) {
-    final avaliacao = getAvaliacao(viewModel.currentUser.avaliacoes);
+    final avaliacao = getAvaliacao(viewModel.user.avaliacoes);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
       child: Row(
@@ -21,10 +21,10 @@ class ProfileInfo extends ViewModelWidget<ProfileViewModel> {
               border: Border.all(color: Colors.black87, width: 2),
             ),
             clipBehavior: Clip.antiAlias,
-            child: viewModel.currentUser.image == null
+            child: viewModel.user.image == null
                 ? Icon(Icons.person)
                 : Image.network(
-                    viewModel.currentUser.image!,
+                    viewModel.user.image!,
                     fit: BoxFit.cover,
                   ),
           ),
@@ -36,7 +36,7 @@ class ProfileInfo extends ViewModelWidget<ProfileViewModel> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(viewModel.currentUser.nome!),
+                    Text(viewModel.user.nome!),
                     RichText(
                       text: TextSpan(
                         style: TextStyle(
@@ -62,7 +62,7 @@ class ProfileInfo extends ViewModelWidget<ProfileViewModel> {
                   height: 10,
                 ),
                 Text(
-                  '${viewModel.currentUser.descricao!}',
+                  '${viewModel.user.descricao!}',
                   maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.justify,
